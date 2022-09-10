@@ -2,12 +2,12 @@ from django.db import models
 
 class Song (models.Model):
     # Required fields
-    name = models.CharField (max_length=64)
+    name = models.CharField (max_length=64, default="")
 
-    album_id = models.DecimalField (max_digits=10, decimal_places=0)
-    artist_id = models.DecimalField (max_digits=10, decimal_places=0)
+    album_id = models.DecimalField (max_digits=10, decimal_places=0, default=0)
+    artist_id = models.DecimalField (max_digits=10, decimal_places=0, default=0)
 
-    audio_file = models.FileField (upload_to="music/", blank=True, default="")
+    audio_file = models.FileField (upload_to="music/")
 
     # Optional fields
     genre = models.CharField (max_length=64, blank=True, null=True)
