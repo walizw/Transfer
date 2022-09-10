@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,6 @@ SECRET_KEY = 'django-insecure-s4v_7xlcrcu^_-y9z41ot%!&kc_w4&s5f-45_lqv$+y0njn7dk
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -115,6 +115,9 @@ PASSWORD_HASHERS = [
   'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 
+# File management
+MEDIA_ROOT = os.path.join (BASE_DIR, "data/")
+MEDIA_URL = "/media/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
