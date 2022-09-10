@@ -13,3 +13,4 @@ class User (models.Model):
     creation_date = models.DateTimeField (default=timezone.now)
     is_admin = models.BooleanField (default=False)
     followers = models.DecimalField (max_digits=10, decimal_places=0, default=0)
+    following = models.DecimalField (max_digits=10, decimal_places=0, default=0)
