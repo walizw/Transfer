@@ -3,7 +3,7 @@ from django.utils import timezone
 
 class User (models.Model):
     # Required fields
-    name = models.CharField (max_length=32)
+    name = models.CharField (max_length=32, unique=True)
     email = models.EmailField ()
     password = models.CharField (max_length=125)
 
