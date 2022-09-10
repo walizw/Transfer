@@ -13,5 +13,5 @@ class UserCreateAPIView (generics.CreateAPIView):
         total_users = len (User.objects.all ())
         
         is_admin = True if total_users == 0 else False
-        hashed_password = make_password (password, None, "md5")
+        hashed_password = make_password (password, None, "pbkdf2_sha256")
         serializer.save (password=hashed_password, is_admin=is_admin)
