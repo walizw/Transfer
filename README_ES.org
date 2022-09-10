@@ -1,0 +1,4 @@
+* Transfer
+
+Transfer es una plataforma de streaming de musical descentralizada y
+federalizada basada en el protocolo de ActivityPub.

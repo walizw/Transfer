@@ -1,0 +1,4 @@
+* Transfer
+
+Transfer is a decentralized and federalized music streaming platform based on
+the ActivityPub protocol.
