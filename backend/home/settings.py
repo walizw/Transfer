@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -128,6 +129,11 @@ AUTH_USER_MODEL = "api.User"
 # File management
 MEDIA_ROOT = os.path.join (BASE_DIR, "data/")
 MEDIA_URL = "/media/"
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta (days=31),
+    "REFRESH_TOKEN_LIFETIME": timedelta (days=31)
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
