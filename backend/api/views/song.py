@@ -1,5 +1,5 @@
 # from rest_framework import generics
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 from ..models import Song
 from ..models import Album
@@ -12,6 +12,7 @@ import music_tag
 class SongListCreateAPIView (generics.ListCreateAPIView):
     queryset = Song.objects.all ()
     serializer_class = SongSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create (self, serializer):
         temp_file = serializer.validated_data.get ("audio_file")
