@@ -115,6 +115,8 @@ PASSWORD_HASHERS = [
   'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 
+AUTH_USER_MODEL = "api.User"
+
 # File management
 MEDIA_ROOT = os.path.join (BASE_DIR, "data/")
 MEDIA_URL = "/media/"
