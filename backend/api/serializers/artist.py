@@ -6,6 +6,7 @@ class ArtistSerializer (serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = [
+            "pk",
             "name",
             "pfp",
             "bio",
