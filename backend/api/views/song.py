@@ -4,6 +4,7 @@ from rest_framework import generics, permissions
 from ..models import Song
 from ..models import Album
 from ..models import Artist
+from ..models import Genre
 
 from ..serializers import SongSerializer
 
@@ -44,10 +45,20 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
 
         album_id = matching_album.pk
 
+        # Genre exists?
+        matching_genre = Genre.objects.filter (name=ftag ["genre"])
+        if not matching_genre.exists ():
+            matching_genre = Genre (name=ftag ["genre"])
+            matching_genre.save ()
+        else:
+            matching_genre = matching_genre.get ()
+
+        genre_id = matching_genre.pk
+
         serializer.save (name=ftag ["title"],
                          album_id=album_id,
                          artist_id=artist_id,
-                         genre=ftag ["genre"],
+                         genre_id=genre_id,
                          lyrics=ftag ["lyrics"],
                          track_number=int (ftag ["track_number"]),
                          year=int (ftag ["year"]))
@@ -57,6 +68,9 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
 
         matching_album.songs += 1
         matching_album.save ()
+
+        matching_genre.songs += 1
+        matching_genre.save ()
 
 class SongDetailAPIView (generics.RetrieveAPIView):
     queryset = Song.objects.all ()

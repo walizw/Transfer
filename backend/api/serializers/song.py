@@ -10,7 +10,7 @@ class SongSerializer (serializers.ModelSerializer):
             "album_id",
             "artist_id",
             "audio_file",
-            "genre",
+            "genre_id",
             "lyrics",
             "track_number",
             "year"
