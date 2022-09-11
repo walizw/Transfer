@@ -5,6 +5,8 @@ from ..models import Artist
 from ..models import Album
 
 from ..serializers import ArtistSerializer
+from ..serializers import SongSerializer
+from ..serializers import AlbumSerializer
 
 class ArtistsAPIView (generics.ListAPIView):
     queryset = Artist.objects.all ()
@@ -15,9 +17,19 @@ class ArtistAPIView (generics.RetrieveAPIView):
     serializer_class = ArtistSerializer
 
 class ArtistSongsAPIView (generics.ListAPIView):
-    # TODO: This
-    pass
+    serializer_class = SongSerializer
+    lookup_url_kwarg = "pk"
+
+    def get_queryset (self):
+        pk = self.kwargs.get (self.lookup_url_kwarg)
+        songs = Song.objects.filter (artist_id=pk)
+        return songs
     
 class ArtistAlbumsAPIView (generics.ListAPIView):
-    # TODO: This
-    pass
+    serializer_class = AlbumSerializer
+    lookup_url_kwarg = "pk"
+
+    def get_queryset (self):
+        pk = self.kwargs.get (self.lookup_url_kwarg)
+        albums = Album.objects.filter (artist_id=pk)
+        return albums

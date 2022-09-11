@@ -58,3 +58,6 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
         matching_album.songs += 1
         matching_album.save ()
 
+class SongDetailAPIView (generics.RetrieveAPIView):
+    queryset = Song.objects.all ()
+    serializer_class = SongSerializer
