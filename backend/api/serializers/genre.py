@@ -6,7 +6,7 @@ class GenreSerializer (serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = [
-            "pk",
+            "id",
             "name",
             "about",
             "artwork",
