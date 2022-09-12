@@ -1,1 +1,1 @@
-from .user import UserEndpointView, WebFingerView
+from .user import UserEndpointView, WebFingerView, UserInboxView, UserOutboxView

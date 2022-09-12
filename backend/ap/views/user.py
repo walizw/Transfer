@@ -53,3 +53,11 @@ class WebFingerView (APIView):
         res = Response (response)
         res.content_type = "application/jrd+json"
         return res
+
+class UserInboxView (APIView):
+    def post (self, request):
+        return Response ("TODO")
+
+class UserOutboxView (APIView):
+    def post (self, request):
+        return Response ("TODO")
