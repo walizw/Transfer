@@ -1,6 +1,6 @@
 import requests
 
-endpoint = "http://localhost:8000/api/v1/user/login/"
+endpoint = "https://transfer.lovelacec.org/api/v1/user/login/"
 
 name = input ("Enter your username: ")
 password = input ("Enter your password: ")

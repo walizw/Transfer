@@ -22,5 +22,7 @@ class PrivateUserSerializer (serializers.ModelSerializer):
             "name",
             "email",
             "password",
+            "pub_key",
+            "priv_key",
             "is_admin"
         ]

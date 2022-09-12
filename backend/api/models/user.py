@@ -39,6 +39,9 @@ class User (AbstractBaseUser, PermissionsMixin):
 
     # With default values fields
     bio = models.TextField (blank=True, null=True)
+
+    priv_key = models.TextField (blank=True, null=True)
+    pub_key = models.TextField (blank=True, null=True)
     
     creation_date = models.DateTimeField (default=timezone.now)
     followers = models.DecimalField (max_digits=10, decimal_places=0, default=0)
