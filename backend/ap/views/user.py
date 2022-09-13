@@ -61,11 +61,15 @@ class WebFingerView (APIView):
 class UserInboxView (APIView):
     media_type = "application/activity+json"
 
-    def post (self, request, *args, **kwargs):
-        return Response ("TODO")
+    def post (self, request, name):
+        print (request.data)
+
+        res = Response ("TODO")
+        res.content_type = "application/activity+json"
+        return res
 
 class UserOutboxView (APIView):
     media_type = "application/activity+json"
 
-    def post (self, request, *args, **kwargs):
+    def post (self, request, name):
         return Response ("TODO")

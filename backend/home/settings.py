@@ -51,6 +51,12 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "ap.renderers.ActivityRenderer",
         "ap.renderers.JRDRenderer"
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        "ap.parsers.ActivityParser"
     ]
 }
 
