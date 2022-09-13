@@ -12,4 +12,4 @@ data = {
 }
 
 request = requests.post (endpoint, data=data, headers=headers)
-print (request.json ())
+print (request.content.decode ())

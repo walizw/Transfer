@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s4v_7xlcrcu^_-y9z41ot%!&kc_w4&s5f-45_lqv$+y0njn7dk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["transfer.lovelacec.org"]
 
 # Application definition
 

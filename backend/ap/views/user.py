@@ -3,11 +3,14 @@ from rest_framework.response import Response
 
 from api.models import User
 from ..models import Activity
+from ..utils.federation import Federation
 
 from django.conf import settings
 
 import json
 import urllib.parse
+import hashlib
+import requests
 
 class UserEndpointView (APIView):
     media_type = "application/activity+json"
@@ -71,6 +74,7 @@ class UserInboxView (APIView):
 
     def post (self, request, name):
         data = json.loads (request.data.decode ("utf-8"))
+        print (data)
         
         act_id = data ["id"]
         act_type = data ["type"]
@@ -88,6 +92,13 @@ class UserInboxView (APIView):
 
             activity = Activity (activity_id=act_id, type=act_type, actor=act_actor, object=act_object)
             activity.save ()
+
+            # Send the accept response
+            accept_response = {
+                "type": "Accept",
+                "act_id": activity.activity_id
+            }
+            request = requests.post (f"{settings.DOMAIN_NAME}/api/v1/users/{name}/outbox", data=accept_response)
 
             print (f"{act_actor} followed {act_object}.")
             return Response ("Success")
@@ -121,7 +132,38 @@ class UserOutboxView (APIView):
     media_type = "application/activity+json"
 
     def post (self, request, name):
-        return Response ("TODO")
+        type = self.request.POST ["type"]
+
+        if type == "Accept":
+            act_id = self.request.POST ["act_id"]
+            activity = Activity.objects.filter (activity_id=act_id)
+            if len (activity) < 1:
+                return Response ("ERR This activity does not exist")
+            activity = activity.get ()
+            activity_id = len (Activity.objects.all ())
+
+            req = {
+                "@context": "https://www.w3.org/ns/activitystreams",
+                "id": f"{settings.DOMAIN_NAME}/api/v1/users/{name}#accepts/follows/{activity_id}",
+                "type": "Accept",
+                "actor": activity.object,
+                "object": {
+                    "id": activity.activity_id,
+                    "type": activity.type,
+                    "actor": activity.actor,
+                    "object": activity.object
+                }
+            }
+            name = activity.object.split ("/")[-1]
+            user = User.objects.filter (name=name)
+            if len (user) < 1:
+                return Response ("Error: This user does not exist")
+            user = user.get ()
+
+            fedi = Federation (user)
+            response = fedi.send_one (activity.actor, req)
+
+        return Response ()
 
 class UserFollowingView (APIView):
     media_type = "application/activity+json"
@@ -168,7 +210,7 @@ class UserFollowersView (APIView):
             "@context": "https://www.w3.org/ns/activitystreams",
             "id": request.build_absolute_uri (),
             "type": "OrderedCollection",
-            "totalItems": 0 #f"{user.followers}", TODO: Como funciona esto?
+            "totalItems": f"{user.followers}",
         }
 
         if request.GET.get ("page") == None:
@@ -177,6 +219,7 @@ class UserFollowersView (APIView):
 
         # TODO: Pagination
         page = request.GET.get ("page")
+        response ["type"] = "OrderedCollectionPage"
         response ["partOf"] = f"{user_url}/followers"
         response ["orderedItems"] = []
 
