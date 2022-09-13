@@ -11,7 +11,7 @@ class UserEndpointView (APIView):
             return Response ("Error: The entered user does not exist!")
 
         user = user.get ()
-        user_url = f"{settings.DOMAIN_NAME}/users/{name}"
+        user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
         response = {
             "@context": [
                 "https://www.w3.org/ns/activitystreams",
@@ -38,7 +38,7 @@ class WebFingerView (APIView):
     def get (self, request):
         resource = request.GET ["resource"]
         user = resource.split (":")[1].split ("@")[0]
-        user_url = f"{settings.DOMAIN_NAME}/users/{user}"
+        user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{user}"
         response = {
             "subject": resource,
             "links": [

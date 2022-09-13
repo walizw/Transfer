@@ -11,7 +11,7 @@ def gen_keypair ():
 
     private_key = key.private_bytes (
         crypto_serialization.Encoding.PEM,
-        crypto_serialization.PrivateFormat.PKCS8,
+        crypto_serialization.PrivateFormat.TraditionalOpenSSL,
         crypto_serialization.NoEncryption ()
     )
 
@@ -21,6 +21,6 @@ def gen_keypair ():
     )
 
     return {
-        "priv_key": private_key,
-        "pub_key": public_key
+        "priv_key": private_key.decode (),
+        "pub_key": public_key.decode ()
     }

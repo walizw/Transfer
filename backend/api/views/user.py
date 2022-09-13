@@ -16,8 +16,15 @@ class UserCreateAPIView (generics.CreateAPIView):
         is_admin = True if total_users == 0 else False
         hashed_password = make_password (password, None, "pbkdf2_sha256")
         pair = gen_keypair ()
+
+        private_key_arr = pair ["priv_key"].split ("\\n")
+        private_key_text = "\n".join (private_key_arr)
+
+        public_key_arr = pair ["pub_key"].split ("\\n")
+        public_key_text = "\n".join (public_key_arr)
+
         serializer.save (password=hashed_password, is_admin=is_admin,
                          is_superuser=is_admin,
                          is_staff=is_admin,
-                         priv_key=pair ["priv_key"],
-                         pub_key=pair ["pub_key"])
+                         priv_key=private_key_text [:-1],
+                         pub_key=public_key_text [:-1])
