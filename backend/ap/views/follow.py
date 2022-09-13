@@ -26,8 +26,31 @@ class FollowRemoteAPIView (APIView):
         fedi = Federation (user)
         response = fedi.send_one (recipient_url, follow_request_message)
 
-        return Response (response.status_code)
+        return Response (response.content.decode ())
 
 class UnfollowRemoteAPIView (APIView):
     def post (self, request):
-        pass
+        username = request.user
+        user = User.objects.filter (name=username).get ()
+
+        recipient_url = request.POST ["recipient"]
+        sender_url = f"{settings.DOMAIN_NAME}/api/v1/users/{username}"
+        activity_id = f"{sender_url}/follows/test/undo"
+
+        follow_request_message = {
+            "@context": "https://www.w3.org/ns/activitystreams",
+            "id": activity_id,
+            "type": "Undo",
+            "actor": sender_url,
+            "object": {
+                "id": f"{sender_url}/follows/test",
+                "type": "Follow",
+                "actor": sender_url,
+                "object": recipient_url
+            }
+        }
+
+        fedi = Federation (user)
+        response = fedi.send_one (recipient_url, follow_request_message)
+
+        return Response (response.content.decode ())
