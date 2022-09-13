@@ -4,7 +4,10 @@ from django.conf import settings
 
 from api.models import User
 
+from ..models import Activity
 from ..utils.federation import Federation
+
+import hashlib
 
 class FollowRemoteAPIView (APIView):
     def post (self, request):
@@ -13,7 +16,9 @@ class FollowRemoteAPIView (APIView):
 
         recipient_url = request.POST ["recipient"]
         sender_url = f"{settings.DOMAIN_NAME}/api/v1/users/{username}"
-        activity_id = f"{sender_url}/follows/test"
+
+        activity_hash = hashlib.new ("md5", str (len (Activity.objects.all ())).encode ()).digest ()
+        activity_id = f"{sender_url}/follows/{activity_hash}"
 
         follow_request_message = {
             "@context": "https://www.w3.org/ns/activitystreams",
@@ -26,6 +31,12 @@ class FollowRemoteAPIView (APIView):
         fedi = Federation (user)
         response = fedi.send_one (recipient_url, follow_request_message)
 
+        act = Activity (activity_id=activity_id, type="Follow", actor=sender_url, object=recipient_url)
+        act.save ()
+
+        user.following += 1
+        user.save ()
+
         return Response (response.content.decode ())
 
 class UnfollowRemoteAPIView (APIView):
@@ -35,7 +46,15 @@ class UnfollowRemoteAPIView (APIView):
 
         recipient_url = request.POST ["recipient"]
         sender_url = f"{settings.DOMAIN_NAME}/api/v1/users/{username}"
-        activity_id = f"{sender_url}/follows/test/undo"
+
+        activity_hash = hashlib.new ("md5", str (len (Activity.objects.all ())).encode ()).digest ()
+        activity_id = f"{sender_url}/follows/{activity_hash}/undo"
+
+        follow_activity = Activity.objects.filter (actor=sender_url, object=recipient_url)
+        if len (follow_activity) < 1:
+            print (f"The activity where {sender_url} follows {recipient_url} doesn't exist")
+            return Response ("Error")
+        follow_activity = follow_activity.get ()
 
         follow_request_message = {
             "@context": "https://www.w3.org/ns/activitystreams",
@@ -43,7 +62,7 @@ class UnfollowRemoteAPIView (APIView):
             "type": "Undo",
             "actor": sender_url,
             "object": {
-                "id": f"{sender_url}/follows/test",
+                "id": follow_activity.activity_id,
                 "type": "Follow",
                 "actor": sender_url,
                 "object": recipient_url
@@ -52,5 +71,9 @@ class UnfollowRemoteAPIView (APIView):
 
         fedi = Federation (user)
         response = fedi.send_one (recipient_url, follow_request_message)
+        follow_activity.delete ()
+
+        user.following -= 1
+        user.save ()
 
         return Response (response.content.decode ())

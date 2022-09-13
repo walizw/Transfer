@@ -122,3 +122,65 @@ class UserOutboxView (APIView):
 
     def post (self, request, name):
         return Response ("TODO")
+
+class UserFollowingView (APIView):
+    media_type = "application/activity+json"
+
+    def get (self, request, name):
+        user = User.objects.filter (name=name)
+        if len (user) < 1:
+            return Response ("This user does not exist")
+        user = user.get ()
+        user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
+
+        response = {
+            "@context": "https://www.w3.org/ns/activitystreams",
+            "id": request.build_absolute_uri (),
+            "type": "OrderedCollection",
+            "totalItems": 0 #f"{user.following}", TODO: Como funciona esto?
+        }
+
+        if request.GET.get ("page") == None:
+            response ["first"] = f"{user_url}/following?page=1"
+            return Response (response)
+
+        # TODO: Pagination
+        page = request.GET.get ("page")
+        response ["partOf"] = f"{user_url}/following"
+        response ["orderedItems"] = []
+
+        following = Activity.objects.filter (type="Follow", actor=user_url)
+        for activity in following:
+            response ["orderedItems"].append (activity.object)
+        return Response (response)
+
+class UserFollowersView (APIView):
+    media_type = "application/activity+json"
+
+    def get (self, request, name):
+        user = User.objects.filter (name=name)
+        if len (user) < 1:
+            return Response ("This user does not exist")
+        user = user.get ()
+        user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
+
+        response = {
+            "@context": "https://www.w3.org/ns/activitystreams",
+            "id": request.build_absolute_uri (),
+            "type": "OrderedCollection",
+            "totalItems": 0 #f"{user.followers}", TODO: Como funciona esto?
+        }
+
+        if request.GET.get ("page") == None:
+            response ["first"] = f"{user_url}/followers?page=1"
+            return Response (response)
+
+        # TODO: Pagination
+        page = request.GET.get ("page")
+        response ["partOf"] = f"{user_url}/followers"
+        response ["orderedItems"] = []
+
+        followers = Activity.objects.filter (type="Follow", object=user_url)
+        for activity in followers:
+            response ["orderedItems"].append (activity.actor)
+        return Response (response)
