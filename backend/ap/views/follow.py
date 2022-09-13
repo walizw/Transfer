@@ -9,6 +9,9 @@ from ..utils.federation import Federation
 
 import hashlib
 
+# TODO: Checar que no sigamos dos veces y no dejemos de seguir un usuario que no seguimos
+# TODO: Usar el outbox q asquito este codigo
+
 class FollowRemoteAPIView (APIView):
     def post (self, request):
         username = request.user
