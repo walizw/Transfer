@@ -64,8 +64,7 @@ class Outbox ():
             "object": follow_activity.object
         }
 
-        print (self.message)
-        # follow_activity.delete ()
+        follow_activity.delete ()
 
     def process_accept (self):
         pass
