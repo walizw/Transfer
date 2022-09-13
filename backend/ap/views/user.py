@@ -5,6 +5,8 @@ from api.models import User
 from django.conf import settings
 
 class UserEndpointView (APIView):
+    media_type = "application/activity+json"
+
     def get (self, request, name):
         user = User.objects.filter (name=name)
         if len (user) == 0:
@@ -25,7 +27,7 @@ class UserEndpointView (APIView):
             "preferredUsername": name,
             "publicKey": {
                 "id": f"{user_url}#main-key",
-                "id": user_url,
+                "owner": user_url,
                 "publicKeyPem": user.pub_key
             }
         }
@@ -35,6 +37,8 @@ class UserEndpointView (APIView):
         return res
 
 class WebFingerView (APIView):
+    media_type = "application/jrd+json"
+
     def get (self, request):
         resource = request.GET ["resource"]
         user = resource.split (":")[1].split ("@")[0]
