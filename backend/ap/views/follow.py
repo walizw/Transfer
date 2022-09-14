@@ -6,9 +6,8 @@ from api.models import User
 
 from ..models import Activity
 from ..utils.federation import Federation
-from ..utils.outbox import Outbox
 
-import hashlib
+import requests
 
 # TODO: Checar que no sigamos dos veces y no dejemos de seguir un usuario que no seguimos
 # TODO: Usar el outbox q asquito este codigo
@@ -21,11 +20,17 @@ class FollowRemoteAPIView (APIView):
         recipient_url = request.POST ["recipient"]
         sender_url = f"{settings.DOMAIN_NAME}/api/v1/users/{username}"
 
-        outbox = Outbox (user, {
+        requests.post (f"{sender_url}/outbox", {
             "type": "Follow",
             "actor": sender_url,
             "object": recipient_url
-        }, recipient_url)
+        })
+
+        # outbox = Outbox (user, {
+        #     "type": "Follow",
+        #     "actor": sender_url,
+        #     "object": recipient_url
+        # }, recipient_url)
 
         user.following += 1
         user.save ()
@@ -40,11 +45,17 @@ class UnfollowRemoteAPIView (APIView):
         recipient_url = request.POST ["recipient"]
         sender_url = f"{settings.DOMAIN_NAME}/api/v1/users/{username}"
 
-        outbox = Outbox (user, {
+        requests.post (f"{sender_url}/outbox", {
             "type": "Unfollow",
             "actor": sender_url,
             "object": recipient_url
-        }, recipient_url)
+        })
+
+        # outbox = Outbox (user, {
+        #     "type": "Unfollow",
+        #     "actor": sender_url,
+        #     "object": recipient_url
+        # }, recipient_url)
 
         user.following -= 1
         user.save ()

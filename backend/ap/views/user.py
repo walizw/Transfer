@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from api.models import User
 from ..models import Activity
 from ..utils.federation import Federation
+from ..utils.outbox import Outbox
 
 from django.conf import settings
 
@@ -74,7 +75,7 @@ class UserInboxView (APIView):
 
     def post (self, request, name):
         data = json.loads (request.data.decode ("utf-8"))
-        print (data)
+        # print (data)
         
         act_id = data ["id"]
         act_type = data ["type"]
@@ -96,6 +97,7 @@ class UserInboxView (APIView):
             # Send the accept response
             accept_response = {
                 "type": "Accept",
+                "actor": act_object,
                 "act_id": activity.activity_id
             }
             request = requests.post (f"{settings.DOMAIN_NAME}/api/v1/users/{name}/outbox", data=accept_response)
@@ -134,36 +136,11 @@ class UserOutboxView (APIView):
     def post (self, request, name):
         type = self.request.POST ["type"]
 
-        if type == "Accept":
-            act_id = self.request.POST ["act_id"]
-            activity = Activity.objects.filter (activity_id=act_id)
-            if len (activity) < 1:
-                return Response ("ERR This activity does not exist")
-            activity = activity.get ()
-            activity_id = len (Activity.objects.all ())
-
-            req = {
-                "@context": "https://www.w3.org/ns/activitystreams",
-                "id": f"{settings.DOMAIN_NAME}/api/v1/users/{name}#accepts/follows/{activity_id}",
-                "type": "Accept",
-                "actor": activity.object,
-                "object": {
-                    "id": activity.activity_id,
-                    "type": activity.type,
-                    "actor": activity.actor,
-                    "object": activity.object
-                }
-            }
-            name = activity.object.split ("/")[-1]
-            user = User.objects.filter (name=name)
-            if len (user) < 1:
-                return Response ("Error: This user does not exist")
-            user = user.get ()
-
-            fedi = Federation (user)
-            response = fedi.send_one (activity.actor, req)
-
+        outbox = Outbox (request.POST.dict ())
         return Response ()
+
+    def get (self, request, name):
+        return Response ("GET not supported")
 
 class UserFollowingView (APIView):
     media_type = "application/activity+json"
