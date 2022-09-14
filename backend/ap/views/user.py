@@ -13,6 +13,8 @@ import urllib.parse
 import hashlib
 import requests
 
+# TODO: Crear clase Inbox
+
 class UserEndpointView (APIView):
     media_type = "application/activity+json"
 
