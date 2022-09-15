@@ -1,7 +1,7 @@
 from api.models import User
 
 from ..models import Activity
-from ..utils.federation import Federation
+from ..classes import Federation
 
 from django.conf import settings
 

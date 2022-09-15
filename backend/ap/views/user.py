@@ -2,12 +2,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from api.models import User
-from ..models import Activity
-from ..utils.federation import Federation
-from ..utils.outbox import Outbox
+from ..models import Activity as ActivityModel
+from ..classes import Federation, Outbox
+from ..classes.activities import OrderedCollection, OrderedCollectionPage
 
 from django.conf import settings
 
+import math
 import json
 import urllib.parse
 import hashlib
@@ -91,7 +92,7 @@ class UserInboxView (APIView):
             user.followers += 1
             user.save ()
 
-            activity = Activity (activity_id=act_id, type=act_type, actor=act_actor, object=act_object)
+            activity = ActivityModel (activity_id=act_id, type=act_type, actor=act_actor, object=act_object)
             activity.save ()
 
             # Send the accept response
@@ -116,7 +117,7 @@ class UserInboxView (APIView):
 
             if act_object ["type"] == "Follow":
                 # Unfollow
-                activity = Activity.objects.filter (activity_id=act_object ["id"])
+                activity = ActivityModel.objects.filter (activity_id=act_object ["id"])
                 if len (activity) < 1:
                     print (f"The activity {act_object ['id']} does not exist")
                     return Response ("The activity does not exist")
@@ -152,26 +153,16 @@ class UserFollowingView (APIView):
         user = user.get ()
         user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
 
-        response = {
-            "@context": "https://www.w3.org/ns/activitystreams",
-            "id": request.build_absolute_uri (),
-            "type": "OrderedCollection",
-            "totalItems": 0 #f"{user.following}", TODO: Como funciona esto?
-        }
+        # TODO: Son necesarias las paginas?
+        following_col = OrderedCollection ()
+        following_col.id = request.build_absolute_uri ()
+        following_col.total_items = user.following
 
-        if request.GET.get ("page") == None:
-            response ["first"] = f"{user_url}/following?page=1"
-            return Response (response)
-
-        # TODO: Pagination
-        page = request.GET.get ("page")
-        response ["partOf"] = f"{user_url}/following"
-        response ["orderedItems"] = []
-
-        following = Activity.objects.filter (type="Follow", actor=user_url)
+        following = ActivityModel.objects.filter (type="Follow", actor=user_url)
         for activity in following:
-            response ["orderedItems"].append (activity.object)
-        return Response (response)
+            following_col.add_item (activity.object)
+        
+        return Response (following_col.to_dict ())
 
 class UserFollowersView (APIView):
     media_type = "application/activity+json"
@@ -183,24 +174,13 @@ class UserFollowersView (APIView):
         user = user.get ()
         user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
 
-        response = {
-            "@context": "https://www.w3.org/ns/activitystreams",
-            "id": request.build_absolute_uri (),
-            "type": "OrderedCollection",
-            "totalItems": f"{user.followers}",
-        }
+        # TODO: Son necesarias las paginas?
+        followers_col = OrderedCollection ()
+        followers_col.id = request.build_absolute_uri ()
+        followers_col.totalItems = user.followers
 
-        if request.GET.get ("page") == None:
-            response ["first"] = f"{user_url}/followers?page=1"
-            return Response (response)
-
-        # TODO: Pagination
-        page = request.GET.get ("page")
-        response ["type"] = "OrderedCollectionPage"
-        response ["partOf"] = f"{user_url}/followers"
-        response ["orderedItems"] = []
-
-        followers = Activity.objects.filter (type="Follow", object=user_url)
+        followers = ActivityModel.objects.filter (type="Follow", object=user_url)
         for activity in followers:
-            response ["orderedItems"].append (activity.actor)
-        return Response (response)
+            followers_col.add_item (activity.actor)
+
+        return Response (followers_col.to_dict ())

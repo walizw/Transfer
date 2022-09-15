@@ -5,7 +5,7 @@ from django.conf import settings
 from api.models import User
 
 from ..models import Activity
-from ..utils.federation import Federation
+from ..classes.federation import Federation
 
 import requests
 
