@@ -1,18 +1,17 @@
 from api.models import User
 
-from ..models import Activity
+from ..models import Activity as ActivityModel
 from ..classes import Federation
+from ..classes.activities import Activity
 
 from django.conf import settings
 
 class Outbox ():
     actor = None
     data = {}
-    message = {
-        "@context": "https://www.w3.org/ns/activitystreams"
-    }
-    activities = len (Activity.objects.all ())
-    activity = None
+    activity = Activity ()
+    activities = len (ActivityModel.objects.all ())
+    activity_model = None
     object = ""
     
     def __init__ (self, data):
@@ -31,38 +30,38 @@ class Outbox ():
             return # No hacer nada?
 
         self.fedi = Federation (self.actor)
-        response = self.fedi.send_one (self.object, self.message)
+        response = self.fedi.send_one (self.object, self.activity.to_dict ())
 
-        if self.activity != None:
-            self.activity.save ()
+        if self.activity_model != None:
+            self.activity_model.save ()
 
     def process_follow (self):
         self.object = self.data ["object"]
 
-        self.message ["id"] = f"{self.data ['actor']}/follows/{self.activities}"
-        self.message ["type"] = "Follow"
-        self.message ["actor"] = self.data ["actor"]
-        self.message ["object"] = self.data ['object']
+        self.activity.id = f"{self.data ['actor']}/follows/{self.activities}"
+        self.activity.type = "Follow"
+        self.activity.actor = self.data ["actor"]
+        self.activity.object = self.data ['object']
 
-        self.activity = Activity (
-            activity_id = self.message["id"],
+        self.activity_model = ActivityModel (
+            activity_id = self.activity.id,
             type = "Follow",
-            actor = self.message ["actor"],
-            object = self.message ["object"]
+            actor = self.activity.actor,
+            object = self.activity.object
         )
 
     def process_unfollow (self):
         self.object = self.data ["object"]
 
-        follow_activity = Activity.objects.filter (actor=self.data ["actor"], object=self.object)
+        follow_activity = ActivityModel.objects.filter (actor=self.data ["actor"], object=self.object)
         if len (follow_activity) < 1:
             return
         follow_activity = follow_activity.get ()
 
-        self.message ["id"] = f"{self.data ['actor']}/follows/{self.activities}/undo"
-        self.message ["type"] = "Undo"
-        self.message ["actor"] = self.data ["actor"]
-        self.message ["object"] = {
+        self.activity.id = f"{self.data ['actor']}/follows/{self.activities}/undo"
+        self.activity.type = "Undo"
+        self.activity.actor = self.data ["actor"]
+        self.activity.object = {
             "id": follow_activity.activity_id,
             "type": "Follow",
             "actor": follow_activity.actor,
@@ -73,15 +72,15 @@ class Outbox ():
 
     def process_accept (self):
         # TODO: Hasta ahora solo se aceptan peticiones de Follow
-        activity = Activity.objects.filter (activity_id=self.data ["act_id"])
+        activity = ActivityModel.objects.filter (activity_id=self.data ["act_id"])
         if len (activity) < 1:
             return
         activity = activity.get ()
 
-        self.message ["id"] = f"{self.data ['actor']}#accepts/follows/{self.activities}"
-        self.message ["type"] = "Accept"
-        self.message ["actor"] = self.data ["actor"]
-        self.message ["object"] = {
+        self.activity.id = f"{self.data ['actor']}#accepts/follows/{self.activities}"
+        self.activity.type = "Accept"
+        self.activity.actor = self.data ["actor"]
+        self.activity.object = {
             "id": activity.activity_id,
             "type": activity.type,
             "actor": activity.actor,
