@@ -30,7 +30,7 @@ class Object ():
 
     def to_dict (self):
         dict = {}
-        dict ["context"] = self.context
+        dict ["@context"] = self.context
         dict ["type"] = self.type
 
         if self.id != None:
