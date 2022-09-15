@@ -1,0 +1,20 @@
+
+* TODO Followers/following page
+
+* TODO Inbox page
+
+* TODO Start reading the webfinger of the users we want to do an action to
+
+* TODO Agregar instancias tranfer como instancias conocidas
+
+** Cuando se suba una cancion enviar una actividad a todas las instancias
+conocidas, para que estas se agreguen en su base de datos
+
+** Cuando se elimine una cancion enviar una actividad a todas las instancias
+conocidas, para que ellas la eliminen de su base de datos
+
+** Permitir hacer una sincronizacion manual de las canciones en varias
+instancias conocidas de Transfer
+
+* TODO Al escuchar una cancion remota, enviar una actividad a esta instancia,
+para que se actualicen sus reproducciones
