@@ -155,15 +155,15 @@ class UserFollowingView (APIView):
         user = user.get ()
         user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
 
-        # TODO: Son necesarias las paginas?
+        # TODO: Esto no fnciona
         following_col = OrderedCollection ()
         following_col.id = request.build_absolute_uri ()
-        following_col.total_items = user.following
+        following_col.totalItems = user.following
 
         following = ActivityModel.objects.filter (type="Follow", actor=user_url)
         for activity in following:
             following_col.add_item (activity.object)
-        
+
         return Response (following_col.to_dict ())
 
 class UserFollowersView (APIView):
@@ -176,7 +176,7 @@ class UserFollowersView (APIView):
         user = user.get ()
         user_url = f"{settings.DOMAIN_NAME}/api/v1/users/{name}"
 
-        # TODO: Son necesarias las paginas?
+        # TODO: Esto no funciona
         followers_col = OrderedCollection ()
         followers_col.id = request.build_absolute_uri ()
         followers_col.totalItems = user.followers
