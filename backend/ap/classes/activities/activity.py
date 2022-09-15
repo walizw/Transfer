@@ -12,7 +12,9 @@ class Activity (Object):
     def to_dict (self):
         dict = super ().to_dict ()
         dict ["actor"] = self.actor
-        dict ["object"] = self.object
+
+        if self.object != None:
+            dict ["object"] = self.object
 
         if self.target != None:
             dict ["target"] = self.target
@@ -27,3 +29,6 @@ class Activity (Object):
             dict ["instrument"] = self.instrument
             
         return dict
+
+class IntransitiveActivity (Activity):
+    object = None

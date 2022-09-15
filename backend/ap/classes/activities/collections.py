@@ -46,7 +46,31 @@ class OrderedCollection (Collection):
         return dict
 
 class CollectionPage (Collection):
-    pass
+    type = "CollectionPage"
+    partOf = ""
+    next = None
+    prev = None
 
-class OrderedCollectionPage (Collection):
-    pass
+    def to_dict (self):
+        dict = super ().to_dict ()
+        dict ["partOf"] = self.partOf
+
+        if self.next != None:
+            dict ["next"] = self.next
+
+        if self.prev != None:
+            dict ["prev"] = self.prev
+
+        return dict
+
+class OrderedCollectionPage (CollectionPage):
+    type = "OrderedCollectionPage"
+    startIndex = None
+
+    def to_dict (self):
+        dict = super ().to_dict ()
+
+        if self.startIndex != None:
+            dict ["startIndex"] = self.startIndex
+
+        return dict
