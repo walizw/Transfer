@@ -18,7 +18,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+import ap.views
+
 urlpatterns = [
+    path (".well-known/webfinger", ap.views.WebFingerView.as_view ()),
     path ('admin/', admin.site.urls),
     path ("api/v1/", include ("api.urls")),
+    path ("api/v1/", include ("ap.urls")),
 ] + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

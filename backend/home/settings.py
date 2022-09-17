@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s4v_7xlcrcu^_-y9z41ot%!&kc_w4&s5f-45_lqv$+y0njn7dk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["transfer.lovelacec.org"]
 
 # Application definition
 
@@ -48,6 +48,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "ap.renderers.ActivityRenderer",
+        "ap.renderers.JRDRenderer"
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        "ap.parsers.ActivityParser"
+    ]
 }
 
 
@@ -156,3 +166,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CUSTOM
+DOMAIN_NAME = "https://transfer.lovelacec.org"
