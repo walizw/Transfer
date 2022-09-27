@@ -12,6 +12,25 @@
 		  <!-- @click="$router.forward ()"></ion-icon> -->
       </span>
     </div>
-    
+
+    <Search />
+    <UserTopbar v-if="userLogged" />
+
   </header>
 </template>
+
+<script>
+  import Search from "./header/Search"
+  import UserTopbar from "./header/UserTopbar"
+
+  export default {
+      name: "Header",
+      components: {
+	  Search,
+	  UserTopbar
+      },
+      props: {
+	  userLogged: Object
+      }
+  }
+</script>

@@ -30,3 +30,230 @@ header .page-flows .flow {
 header .page-flows .flow:hover {
     color: #fff;
 }
+
+header .page-flows .flow .disabled {
+    color: #5e5e5e;
+}
+
+header .search {
+    margin-left: 1%;
+}
+
+header .search input {
+    border-radius: 15px;
+    border: none;
+    background: #fff;
+    color: #181818;
+    padding-left: 30px;
+    outline: none;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/ios-search.svg);
+    background-repeat: no-repeat;
+    background-size: 10%;
+    background-position: 5px;
+}
+
+header .user {
+    width: 300px;
+    margin-left: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .user .ion-icon {
+    font-size: 20px;
+}
+
+header .user .ion-icon:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+header .user__info img {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+header .user__actions button {
+    background: none;
+    border: none;
+}
+
+header .user__actions .dropdown-menu:before {
+    position: absolute;
+    top: -30px;
+    right: 7px;
+    color: #282828;
+    font-size: 36px;
+}
+
+header .user__actions .dropdown-menu a {
+    color: #aaa;
+    transition: all 0.2s ease;
+}
+
+header .user__actions .dropdown-menu a:hover {
+    background: none;
+    transition: all 0.2s ease;
+}
+
+header .user__actions .dropdown-menu li {
+    padding: 10px;
+    margin: 0;
+    transition: all 0.2s ease;
+}
+
+header .user__actions .dropdown-menu li:hover {
+    background: #aaa;
+    transition: all 0.2s ease;
+}
+
+header .user__actions .dropdown-menu li:hover a {
+    color: #c8c8c8;
+    transition: all 0.2s ease;
+}
+
+.content {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.content__left {
+    width: 15%;
+}
+
+.content__middle {
+    width: 70%;
+}
+
+.content__right {
+    width: 15%;
+}
+
+@media (max-width: 1400px) {
+    .content__left  {
+	width: 20%;
+    }
+
+    .content__middle {
+	width: 80%;
+    }
+
+    .content__right {
+	display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .content__left {
+	width: 100%;
+    }
+
+    .content__middle {
+	width: 100%;
+    }
+}
+
+nav {
+    padding: 15px;
+    background: #282828;
+    color: #aaa;
+    overflow-y: scroll;
+}
+
+.navigation__list {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+}
+
+.navigation__list__item {
+    color: #aaa;
+    padding: 5px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.navigation__list__item:hover {
+    color: #fff;
+    text-decoration: none;
+    border-right: 3px solid #1ed760;
+}
+
+.navigation__list__item .ion-icon {
+    width: 25px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    nav {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+    }
+
+    .navigation__list {
+	margin-bottom: 0;
+	width: calc(100% / 3);
+	text-align: center;
+    }
+
+    .navigation__list__item {
+	width: 100%;
+	text-align: center;
+    }
+
+    .navigation__list__item .ion-icon {
+	display: none;
+    }
+
+    .navigation__list__item span {
+	margin: 0 auto;
+    }
+
+    .navigation__list__item:hover {
+	border: none
+    }
+}
+
+.playlist {
+    padding: 15px;
+    background: #282828;
+    border-top: 1px solid #181818;
+    border-bottom: 1px solid #181818;
+}
+
+.playlist:hover {
+    background: #424242;
+}
+
+.playlist:hover a {
+    color: #fff;
+}
+
+.playlist a {
+    color: #aaa;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.playlist a:hover {
+    text-decoration: none;
+}
+
+.playlist a .ion-icon {
+    font-size: 24px;
+    color: #fff;
+    margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+    .playlist {
+	display: none;
+    }
+}
