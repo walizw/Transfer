@@ -2,3 +2,42 @@
 
 Transfer is a decentralized and federalized music streaming platform based on
 the ActivityPub protocol.
+
+** Running Transfer
+
+To run transfer you will need to run the backend and the frontend (both work
+separatedly, as the backend is a mere api). To run the backend first, create
+a python environment:
+
+#+BEGIN_SRC bash
+  python -m venv venv
+#+END_SRC
+
+Activate the environment:
+
+#+BEGIN_SRC bash
+  source venv/bin/activate
+#+END_SRC
+
+After that install the requirements and run the backend:
+
+#+BEGIN_SRC bash
+  pip install -r requirements
+  cd backend
+  python manage.py migrate
+  python manage.py runserver
+#+END_SRC
+
+And it will be running in =localhost:8000=, now you'll have to run the frontent.
+Fire up a different terminal, go to the =frontend= folder and execute:
+
+#+BEGIN_SRC bash
+  npm i
+  npm run serve
+#+END_SRC
+
+And both your frontend and backend will be running now
+
+* Creating a transfer instance
+
+TODO: This
