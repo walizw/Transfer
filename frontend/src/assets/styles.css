@@ -1,0 +1,32 @@
+body {
+    background-color: #181818;
+    font-family: "Roboto", sans-serif;
+}
+
+body a {
+    color: #aaa;
+}
+
+board a:hover {
+    color: #c8c8c8k
+}
+
+header {
+    background: #282828;
+    padding: 10px;
+    color: #aaa;
+    border-bottom: 1px solid #181818;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+header .page-flows .flow {
+    font-size: 20px;
+    color: #aaa;
+    margin: 0 10px;
+}
+
+header .page-flows .flow:hover {
+    color: #fff;
+}
