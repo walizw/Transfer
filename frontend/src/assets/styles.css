@@ -257,3 +257,313 @@ nav {
 	display: none;
     }
 }
+
+.playing {
+    background: #282828;
+    border-bottom: 1px solid #181818;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.playing__art img {
+    width: 50px;
+    height: 50px;
+}
+
+.playing__song {
+    color: #aaa;
+    padding-left: 15px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.playing__song a {
+    color: #aaa;
+}
+
+.playing__song a:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.playing__add {
+    margin-left: auto;
+    padding-right: 15px;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .playing {
+	border-top: 1px solid #181818;
+    }
+}
+
+.current-track {
+    background: #282828;
+    padding: 5px 15px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.current-track__actions {
+    width: 5%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-track__actions a {
+    font-size: 24px;
+    color: #c8c8c8;
+}
+
+.current-track__actions a:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.current-track__actions .play {
+    font-size: 36px;
+}
+
+.current-track__progress {
+    width: 70%;
+    padding: 0 30px;
+    color: #aaa;
+    font-size: 11px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-track__progress__bar {
+    width: 100%;
+    padding: 0 15px;
+}
+
+.current-track__progress__bar .noUi-target {
+    border: none;
+    height: 4px;
+}
+
+.current-track__progress__bar .noUi-base {
+    background: #1ed760;
+}
+
+.current-track__progress__bar .noUi-origin {
+    background: #5e5e5e;
+}
+
+.current-track__progress__bar .noUi-handle {
+    background: #c8c8c8;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: none;
+    border: none;
+    left: 0;
+    display: none;
+}
+
+.current-track__progress__bar .noUi-handle:before, .current-track__progress__bar .noUi-handle:after {
+    background: none;
+}
+
+.current-track__progress:hover .noUi-handle {
+    display: block;
+}
+
+.current-track__options {
+    width: 25%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.current-track__options .lyrics {
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 15%;
+    padding: 0 15px 0 0;
+}
+
+.current-track__options .controls {
+    width: 85%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.current-track__options .controls .devices:hover {
+    text-decoration: none;
+}
+
+.current-track__options .controls .devices .ion-icon {
+    margin-right: 5px;
+}
+
+.current-track__options .controls .devices span {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.current-track__options .controls .volume {
+    width: 25%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.current-track__options .controls .volume .ion-icon {
+    width: 20px;
+    color: #aaa;
+}
+
+.current-track__options .controls .volume #song-volume {
+    width: calc(80% - 20px);
+    border: none;
+    height: 4px;
+}
+
+.current-track__options .controls .volume #song-volume .noUi-base {
+    background: #c8c8c8;
+}
+
+.current-track__options .controls .volume #song-volume .noUi-origin {
+    background: #5e5e5e;
+}
+
+.current-track__options .controls .volume #song-volume .noUi-handle {
+    background: #c8c8c8;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: none;
+    border: none;
+    left: 0;
+    display: none;
+}
+
+
+.current-track__options .controls .volume #song-volume .noUi-handle:before, .current-track__options .controls .volume #song-volume .noUi-handle:after {
+    background: none;
+}
+
+.current-track__options .controls .volume #song-volume:hover .noUi-handle {
+    display: block;
+}
+
+@media (max-width: 1400px) {
+    .current-track__actions {
+	width: 10%;
+    }
+
+    .current-track__progress {
+	width: 50%;
+    }
+
+    .current-track__options {
+	width: 40%;
+    }
+}
+
+@media (max-width: 980px) {
+    .current-track__actions {
+	width: 10%;
+    }
+
+    .current-track__progress {
+	width: 40%;
+    }
+
+    .current-track__options {
+	width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .current-track__actions {
+	width: 25%;
+    }
+
+    .current-track__progress {
+	width: 75%;
+    }
+
+    .current-track__options {
+	width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .current-track__actions {
+	width: 100%;
+	justify-content: space-around;
+	padding: 5px 0;
+    }
+
+    .current-track__progress {
+	width: 100%;
+	padding: 5px 0;
+    }
+
+    .current-track__options {
+	width: 100%;
+	padding: 5px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .current-track__action {
+	padding-top: 15px;
+    }
+}
+
+
+/* Some extra stuff */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #373737;
+}
+
+@media (max-width: 650px) {
+    .header .page-flows {
+	width: 20%;
+	margin: 0;
+    }
+
+    .header .search {
+	width: 65%;
+	margin: 0;
+    }
+
+    .header .search input {
+	width: 100%;
+	background-size: 7%;
+    }
+
+    .header .user {
+	width: 100%;
+	margin-top: 15px;
+	justify-content: space-around;
+    }
+}
+
+.h1 {
+    font-size: 36px;
+}
+
+.h2, .navigation__list__header {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}

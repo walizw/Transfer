@@ -1,8 +1,8 @@
 <template>
-  <Header :user-logged="userLogged" />
+  <Header :user_logged="user_logged" />
 
   <div class="content">
-    <NavigationLeft :user-logged="userLogged" />
+    <NavigationLeft :user_logged="user_logged" :playing_song="playing_song" />
 
     <div class="content__middle">
       <router-view/>
@@ -26,8 +26,18 @@
 	  Header,
 	  NavigationLeft
       },
+      data () {
+	  return {
+	      playing_song: {
+		  "name": "Not playing anything",
+		  "album_id": 0,
+		  "artist_id": 0,
+		  "audio_file": 0
+	      }
+	  }
+      },
       computed: {
-	  userLogged () {
+	  user_logged () {
 	      return auth.getUserLogged ()
 	  }
       }

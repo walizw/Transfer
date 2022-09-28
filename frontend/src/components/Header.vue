@@ -14,7 +14,7 @@
     </div>
 
     <Search />
-    <UserTopbar v-if="userLogged" />
+    <UserTopbar v-if="user_logged" />
 
   </header>
 </template>
@@ -30,7 +30,7 @@
 	  UserTopbar
       },
       props: {
-	  userLogged: Object
+	  user_logged: Object
       }
   }
 </script>
