@@ -523,6 +523,11 @@ nav {
     }
 }
 
+.middle_scroll {
+    height: 617px;
+    overflow-y: scroll;
+}
+
 
 /* Some extra stuff */
 ::-webkit-scrollbar {

@@ -5,7 +5,7 @@
     <NavigationLeft :user_logged="user_logged" :playing_song="playing_song" />
 
     <div class="content__middle">
-      <router-view/>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@
       },
       computed: {
 	  user_logged () {
-	      return auth.getUserLogged ()
+	      return auth.get_user_logged ()
 	  }
       }
   }

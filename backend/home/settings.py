@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s4v_7xlcrcu^_-y9z41ot%!&kc_w4&s5f-45_lqv$+y0njn7dk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["transfer.lovelacec.org"]
+ALLOWED_HOSTS = ["transfer.lovelacec.org", "localhost"]
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    "corsheaders",
     'api',
     'ap',
 ]
@@ -64,6 +65,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,6 +146,9 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta (days=31),
     "REFRESH_TOKEN_LIFETIME": timedelta (days=31)
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

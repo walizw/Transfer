@@ -1,6 +1,6 @@
 import requests
 
-endpoint = "https://transfer.lovelacec.org/api/v1/user/create/"
+endpoint = "http://localhost:8000/api/v1/user/create/"
 
 username = input ("Enter the name for the newly created user: ")
 password = input ("Enter the password for the newly created user: ")
