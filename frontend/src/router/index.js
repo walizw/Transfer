@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from '../views/Home.vue'
-import Login from "../views/Login.vue"
-import Empty from "../views/Empty.vue"
+import Home from '../views/Home'
+import Login from "../views/Login"
+import Register from "../views/Register"
+import Empty from "../views/Empty"
 
 import auth from "../logic/auth"
 
@@ -20,7 +21,7 @@ const routes = [
     {
 	path: "/register",
 	name: "Register",
-	component: Empty
+	component: Register
     },
     {
 	path: "/browse",
@@ -62,7 +63,7 @@ const router = createRouter({
 router.beforeEach (async (to) => {
     const public_pages = ["/login", "/register"]
     const auth_required = !public_pages.includes (to.path)
-    const authenticated = auth.get_user_logged ()
+    const authenticated = auth.is_user_logged ()
 
     if (auth_required && !authenticated)
     {

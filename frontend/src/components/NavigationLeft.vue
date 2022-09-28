@@ -6,7 +6,7 @@
       <NavigationList id="music" name="Music" :content="music_menu" />
     </nav>
 
-    <section class="playlist" v-if="user_logged">
+    <section class="playlist" v-if="is_user_logged">
       <a href="#">
 	<ion-icon name="add-circle-outline"></ion-icon>
 	New Playlist
@@ -27,7 +27,7 @@
 	  <!-- TODO: Get artist -->
 	</a>
 
-	<div class="playing__add" v-if="user_logged">
+	<div class="playing__add" v-if="is_user_logged">
 	  <!-- TODO: Add -->
 	</div>
       </div>
@@ -45,7 +45,7 @@
 	  NavigationList
       },
       props: {
-	  user_logged: Object,
+	  is_user_logged: Boolean,
 	  playing_song: Object
       },
       data () {

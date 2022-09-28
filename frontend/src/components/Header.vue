@@ -14,7 +14,7 @@
     </div>
 
     <Search />
-    <UserTopbar v-if="user_logged" />
+    <UserTopbar v-if="is_user_logged" />
 
   </header>
 </template>
@@ -30,7 +30,7 @@
 	  UserTopbar
       },
       props: {
-	  user_logged: Object
+	  is_user_logged: Boolean
       }
   }
 </script>

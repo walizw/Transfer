@@ -4,14 +4,21 @@ import axios from "axios"
 import cookies from "js-cookie"
 
 export default {
-    set_user_logged (access, refresh) {
+    set_user_logged (access, refresh, name) {
 	cookies.set ("access", access)
 	cookies.set ("refresh", refresh)
+	cookies.set ("name", name)
     },
-    get_user_logged () {
-	return cookies.get ("access")
+    is_user_logged () {
+	return cookies.get ("access") != null
     },
-    register (name, mail, password1, password2) {
+    register (name, mail, password) {
+	const user = {
+	    "name": name,
+	    "email": mail,
+	    "password": password
+	}
+	return axios.post (config.ENDPOINT + "user/create/", user)
     },
     login (username, password) {
 	const user = {

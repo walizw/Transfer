@@ -1,8 +1,8 @@
 <template>
-  <Header :user_logged="user_logged" />
+  <Header :is_user_logged="is_user_logged" />
 
   <div class="content">
-    <NavigationLeft :user_logged="user_logged" :playing_song="playing_song" />
+    <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" />
 
     <div class="content__middle">
       <router-view></router-view>
@@ -11,7 +11,7 @@
 </template>
 
 <style>
-  @import "./assets/styles.css";
+  @import "@/assets/styles.css";
 </style>
 
 <script>
@@ -37,8 +37,8 @@
 	  }
       },
       computed: {
-	  user_logged () {
-	      return auth.get_user_logged ()
+	  is_user_logged () {
+	      return auth.is_user_logged ()
 	  }
       }
   }

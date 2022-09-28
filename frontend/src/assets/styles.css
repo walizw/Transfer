@@ -61,11 +61,11 @@ header .user {
     align-items: center;
 }
 
-header .user .ion-icon {
+header .user ion-icon {
     font-size: 20px;
 }
 
-header .user .ion-icon:hover {
+header .user ion-icon:hover {
     color: #fff;
     cursor: pointer;
 }
@@ -80,6 +80,18 @@ header .user__info img {
 header .user__actions button {
     background: none;
     border: none;
+}
+
+header .user__actions .dropdown-menu {
+    background: #282828;
+    margin-top: 25px;
+    border-radius: 2px;
+    padding: 0;
+    border: none;
+}
+
+.dropdown-toggle:after {
+    display: none;
 }
 
 header .user__actions .dropdown-menu:before {
@@ -184,7 +196,7 @@ nav {
     border-right: 3px solid #1ed760;
 }
 
-.navigation__list__item .ion-icon {
+.navigation__list__item ion-icon {
     width: 25px;
     display: block;
 }
@@ -207,7 +219,7 @@ nav {
 	text-align: center;
     }
 
-    .navigation__list__item .ion-icon {
+    .navigation__list__item ion-icon {
 	display: none;
     }
 
@@ -246,7 +258,7 @@ nav {
     text-decoration: none;
 }
 
-.playlist a .ion-icon {
+.playlist a ion-icon {
     font-size: 24px;
     color: #fff;
     margin-right: 15px;
@@ -402,7 +414,7 @@ nav {
     text-decoration: none;
 }
 
-.current-track__options .controls .devices .ion-icon {
+.current-track__options .controls .devices ion-icon {
     margin-right: 5px;
 }
 
@@ -418,7 +430,7 @@ nav {
     align-items: center;
 }
 
-.current-track__options .controls .volume .ion-icon {
+.current-track__options .controls .volume ion-icon {
     width: 20px;
     color: #aaa;
 }
