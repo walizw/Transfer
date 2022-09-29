@@ -6,7 +6,7 @@
             </a>
 
             <a href="#">
-	              <ion-icon name="play"></ion-icon>
+	              <ion-icon :name="playing ? 'pause' : 'play'"></ion-icon>
             </a>
 
             <a href="#">
@@ -58,7 +58,8 @@
 export default {
 	  name: "CurrentTrack",
 	  props: {
-	      playing_song: Object
+	      playing_song: Object,
+        playing: Boolean
 	  }
 }
 </script>

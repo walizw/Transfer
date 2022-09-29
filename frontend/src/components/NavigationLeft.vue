@@ -20,11 +20,13 @@
 
             <div class="playing__song">
 	              <a class="playing__song__name">
+                    <!-- TODO: Go to album page -->
 	                  {{playing_song ? playing_song.name : "Nothing is currently playing"}}
 	              </a>
 
-	              <a class="playing__song_artist" href="">
-	                  <!-- TODO: Get artist -->
+	              <a class="playing__song_artist" href="#">
+                    <!-- TODO: Go to artist page -->
+                    {{playing_song ? playing_song.artist.name : ""}}
 	              </a>
 
 	              <div class="playing__add" v-if="is_user_logged">

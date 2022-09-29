@@ -5,11 +5,14 @@
         <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" />
 
         <div class="content__middle">
-            <router-view></router-view>
+            <router-view @play_song="play_song"></router-view>
         </div>
     </div>
 
-    <CurrentTrack :playing_song="playing_song" />
+    <CurrentTrack :playing_song="playing_song" :playing="playing" />
+    <audio hidden id="song_audio">
+        <source v-if="playing_song" :src="playing_song.audio_file" type="audio/mpeg" />
+    </audio>
 </template>
 
 <style>
@@ -32,6 +35,7 @@ export default {
     },
     data () {
 	      return {
+            playing: false,
 	          playing_song: null
 	      }
     },
@@ -50,8 +54,25 @@ export default {
             let now_playing = $(".playing").outerHeight ()
 
             let nav_height = total_height - (header_height + footer_height + playlist_height + now_playing)
+            let middle_height = total_height - (header_height + footer_height)
 
             $("nav").css ("height", nav_height)
+            $(".middle_scroll").css ("height", middle_height)
+        },
+        play_song (song) {
+            this.playing_song = song
+
+            let song_audio = document.getElementById ("song_audio")
+
+            try {
+                song_audio.load ()
+                song_audio.play ()
+                this.playing = true
+            }
+            catch (err) {
+                this.playing = false
+                console.log (err)
+            }
         }
     },
     created () {
