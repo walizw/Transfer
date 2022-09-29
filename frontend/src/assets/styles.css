@@ -540,7 +540,7 @@ nav {
 }
 
 .middle_scroll {
-    height: 617px;
+    /* height: 617px; */
     overflow-y: scroll;
 }
 
@@ -585,7 +585,7 @@ nav {
     align-items: flex-end;
 }
 
-.middle_scroll__header .middle_scroll_info .profile__img {
+.middle_scroll__header .middle_scroll__info .profile__img {
     margin-right: 15px;
 }
 
@@ -609,7 +609,7 @@ nav {
     padding: 0 0 10px 0;
 }
 
-.middle_scroll__header .middle_scroll_info__actions {
+.middle_scroll__header .middle_scroll__info__actions {
     display: flex;
     flex-flow: row wrap;
 }
@@ -1191,7 +1191,7 @@ nav {
     height: 200px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: 100% 100% !important;
     display: flex;
     align-items: center;
 }

@@ -2,10 +2,13 @@
     <Header :is_user_logged="is_user_logged" />
 
     <div class="content">
-        <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" />
+        <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" :nav_height="nav_height" />
 
         <div class="content__middle">
-            <router-view @play_song="play_song"></router-view>
+            <div class="middle_scroll"
+                 :style="'height:' + middle_height + 'px;'">
+                <router-view @play_song="play_song"></router-view>
+            </div>
         </div>
     </div>
 
@@ -41,6 +44,13 @@ export default {
 	          playing_song: null,
             current_playtime: "0:00",
             total_playtime: "0:00",
+            header_height: 0,
+            footer_height: 0,
+            playlist_height: 0,
+            now_playing_height: 0,
+            total_height: 0,
+            nav_height: 0,
+            middle_height: 0
 	      }
     },
     computed: {
@@ -48,20 +58,25 @@ export default {
 	          return auth.is_user_logged ()
 	      }
     },
+    watch: {
+        total_height () {
+            this.nav_height = window.innerHeight - (this.header_height +
+                                         this.footer_height +
+                                         this.playlist_height +
+                                         this.now_playing_height)
+
+            this.middle_height =  window.innerHeight - (this.header_height +
+                                                        this.footer_height)
+        }
+    },
     methods: {
         resize_viewports () {
-            let total_height = $(window).height ()
+            this.header_height = $("header").outerHeight ()
+            this.footer_height = $(".current-track").outerHeight ()
+            this.playlist_height = $(".playlist").outerHeight ()
+            this.now_playing_height = $(".playing").outerHeight ()
 
-            let header_height = $("header").outerHeight ()
-            let footer_height = $(".current-track").outerHeight ()
-            let playlist_height = $(".playlist").outerHeight ()
-            let now_playing = $(".playing").outerHeight ()
-
-            let nav_height = total_height - (header_height + footer_height + playlist_height + now_playing)
-            let middle_height = total_height - (header_height + footer_height)
-
-            $("nav").css ("height", nav_height)
-            $(".middle_scroll").css ("height", middle_height)
+            this.total_height = window.innerHeight
         },
         play_song (song) {
             this.playing_song = song
@@ -105,7 +120,7 @@ export default {
     created () {
         let self = this
         $(window).on ("resize", self.resize_viewports)
-        $(window).ready (self.resize_viewports)
+        $(document).ready (self.resize_viewports)
     }
 }
 </script>

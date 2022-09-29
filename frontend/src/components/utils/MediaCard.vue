@@ -6,9 +6,13 @@
         </div>
 
         <div class="media-card__footer">
-            <div :v-if="name">
+            <div v-if="name && name1">
                 <router-link :to="url">{{name}}</router-link> By<br>
                 <router-link :to="url1">{{name1}}</router-link>
+            </div>
+
+            <div v-if="name && !name1">
+                <router-link :to="url">{{name}}</router-link>
             </div>
         </div>
     </div>

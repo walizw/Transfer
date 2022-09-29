@@ -9,7 +9,7 @@ from ..serializers import SongSerializer
 from ..serializers import AlbumSerializer
 
 class ArtistsAPIView (generics.ListAPIView):
-    queryset = Artist.objects.all ()
+    queryset = Artist.objects.all ().order_by ("-pk")
     serializer_class = ArtistSerializer
 
 class ArtistAPIView (generics.RetrieveAPIView):

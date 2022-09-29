@@ -1,7 +1,7 @@
 <template>
     <div class="content__left">
 
-        <nav>
+        <nav :style="'height:' + nav_height + 'px;'">
             <NavigationList id="main" name="Main" :content="main_menu" />
             <NavigationList id="music" name="Music" :content="music_menu" />
         </nav>
@@ -48,21 +48,16 @@ export default {
     },
     props: {
 	      is_user_logged: Boolean,
-	      playing_song: Object
+	      playing_song: Object,
+        nav_height: Number
     },
     data () {
 	      return {
 	          main_menu: [
-                {
-                    "id": 0,
-                    "name": "Home",
-                    "url": "/",
-                    "icon": "home"
-                },
 		            {
 		                "id": 1,
 		                "name": "Browse",
-		                "url": "/browse",
+		                "url": "/",
 		                "icon": "compass"
 		            },
 		            {

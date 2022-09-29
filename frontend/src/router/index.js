@@ -4,6 +4,7 @@ import Home from '../views/Home'
 import Login from "../views/Login"
 import Register from "../views/Register"
 import Upload from "../views/Upload"
+import Artist from "../views/Artist"
 import Empty from "../views/Empty"
 
 import auth from "../logic/auth"
@@ -30,9 +31,9 @@ const routes = [
 	      component: Upload
     },
     {
-	      path: "/browse",
-	      name: "Browse",
-	      component: Empty
+        path: "/artist/:id",
+        name: "Artist",
+        component: Artist
     },
     {
 	      path: "/activity",
