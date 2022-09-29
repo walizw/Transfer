@@ -15,13 +15,17 @@
         </div>
 
         <div class="current-track__progress">
-            <div class="current-track__progress__start">0:00</div>
+            <div class="current-track__progress__start">
+                {{current_playtime}}
+            </div>
 
             <div class="current-track__progress__bar">
 	              <div id="song-progress"></div>
             </div>
 
-            <div class="current-track__progress__finish">0:00</div>
+            <div class="current-track__progress__finish">
+                {{total_playtime}}
+            </div>
         </div>
 
         <div class="current-track__options">
@@ -59,7 +63,9 @@ export default {
 	  name: "CurrentTrack",
 	  props: {
 	      playing_song: Object,
-        playing: Boolean
+        playing: Boolean,
+        current_playtime: String,
+        total_playtime: String
 	  }
 }
 </script>

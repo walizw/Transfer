@@ -9,7 +9,9 @@
         </div>
     </div>
 
-    <CurrentTrack :playing_song="playing_song" :playing="playing" />
+    <CurrentTrack :playing_song="playing_song" :playing="playing"
+                  :current_playtime="current_playtime"
+                  :total_playtime="total_playtime" />
     <audio hidden id="song_audio">
         <source v-if="playing_song" :src="playing_song.audio_file" type="audio/mpeg" />
     </audio>
@@ -36,7 +38,9 @@ export default {
     data () {
 	      return {
             playing: false,
-	          playing_song: null
+	          playing_song: null,
+            current_playtime: "0:00",
+            total_playtime: "0:00",
 	      }
     },
     computed: {
@@ -67,7 +71,30 @@ export default {
             try {
                 song_audio.load ()
                 song_audio.play ()
+
                 this.playing = true
+
+                let self = this
+                song_audio.oncanplay = (e) => {
+                    let total_seconds = Math.floor (song_audio.duration % 60)
+                    let total_minutes = Math.floor (song_audio.duration / 60)
+
+                    self.total_playtime = `${total_minutes}:${total_seconds < 10 ? '0' + total_seconds : total_seconds}`
+                }
+
+                song_audio.ontimeupdate = (e) => {
+                    self.current_playtime = ""
+
+                    let seconds = Math.floor (song_audio.currentTime)
+                    let minutes = Math.floor (seconds / 60)
+
+                    self.current_playtime += `${minutes}:`
+
+                    if (seconds % 60 < 10)
+                        self.current_playtime += `0${seconds % 60}`
+                    else
+                        self.current_playtime += `${seconds  % 60}`
+                }
             }
             catch (err) {
                 this.playing = false

@@ -53,20 +53,26 @@ export default {
     data () {
 	      return {
 	          main_menu: [
+                {
+                    "id": 0,
+                    "name": "Home",
+                    "url": "/",
+                    "icon": "home"
+                },
 		            {
-		                "id": 0,
+		                "id": 1,
 		                "name": "Browse",
 		                "url": "/browse",
 		                "icon": "compass"
 		            },
 		            {
-		                "id": 1,
+		                "id": 2,
 		                "name": "Activity",
 		                "url": "/activity",
 		                "icon": "people"
 		            },
 		            {
-		                "id": 2,
+		                "id": 3,
 		                "name": "Radio",
 		                "url": "/radio",
 		                "icon": "radio"
