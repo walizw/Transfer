@@ -1,6 +1,8 @@
 body {
     background-color: #181818;
     font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
 }
 
 body a {
@@ -62,6 +64,7 @@ header .user {
 }
 
 header .user ion-icon {
+    color: #aaa;
     font-size: 20px;
 }
 
@@ -540,6 +543,21 @@ nav {
     overflow-y: scroll;
 }
 
+.midle_scroll__header {
+    height: 320px;
+    border-bottom: 1px solid #282828;
+    position: relative;
+    background-image: url(@/assets/images/header_bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
 /* Some extra stuff */
 ::-webkit-scrollbar {
@@ -583,4 +601,52 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 5px;
+}
+
+button {
+    border-radius: 20px;
+    border :none;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.button-dark {
+    background: #1ed760;
+    color: #fff;
+    border: 1px solid #1ed760;
+}
+
+.button-dark:hover {
+    background: #43e57d;
+}
+
+.button-light {
+    background: none;
+    color: #c8c8c8;
+    border: 1px solid #c8c8c8;
+}
+
+.button-light:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.section-title {
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 1.25px;
+    font-size: 13.2px;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent;
 }

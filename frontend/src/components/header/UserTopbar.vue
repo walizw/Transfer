@@ -28,8 +28,12 @@
 	</button>
 
 	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_actions_dropdown">
-	  <!-- TODO: Add things here -->
-	  <li><a href="">a</a></li>
+	  <li><a>Profile</a></li>
+	  <li><a>Settings</a></li>
+	  <li>
+	    <router-link to="/upload">Upload</router-link>
+	  </li>
+	  <li><a>Log Out</a></li>
 	</ul>
       </div>
     </div>
@@ -37,7 +41,6 @@
 </template>
 
 <script>
-    
   import user from "@/logic/user"
   
   export default {

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import Login from "../views/Login"
 import Register from "../views/Register"
+import Upload from "../views/Upload"
 import Empty from "../views/Empty"
 
 import auth from "../logic/auth"
@@ -22,6 +23,11 @@ const routes = [
 	path: "/register",
 	name: "Register",
 	component: Register
+    },
+    {
+	path: "/upload",
+	name: "Upload",
+	component: Upload
     },
     {
 	path: "/browse",

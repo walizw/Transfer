@@ -4,7 +4,7 @@
       <div class="row">
 
 	<form @submit="on_submit" class="col-md-8 align-self-center mx-auto p-5">
-	  <div class="mb3">
+	  <div class="mb-3">
 	    <h1 class="text-light">Welcome to Transfer!</h1>
 	    <h3 class="text-secondary">A valley of freedom and decentralization is waiting for you!</h3>
 	  </div>
