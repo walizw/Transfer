@@ -150,25 +150,25 @@ header .user__actions .dropdown-menu li:hover a {
 
 @media (max-width: 1400px) {
     .content__left  {
-	width: 20%;
+	      width: 20%;
     }
 
     .content__middle {
-	width: 80%;
+	      width: 80%;
     }
 
     .content__right {
-	display: none;
+	      display: none;
     }
 }
 
 @media (max-width: 768px) {
     .content__left {
-	width: 100%;
+	      width: 100%;
     }
 
     .content__middle {
-	width: 100%;
+	      width: 100%;
     }
 }
 
@@ -206,32 +206,32 @@ nav {
 
 @media (max-width: 768px) {
     nav {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
+	      display: flex;
+	      flex-flow: row wrap;
+	      justify-content: space-around;
     }
 
     .navigation__list {
-	margin-bottom: 0;
-	width: calc(100% / 3);
-	text-align: center;
+	      margin-bottom: 0;
+	      width: calc(100% / 3);
+	      text-align: center;
     }
 
     .navigation__list__item {
-	width: 100%;
-	text-align: center;
+	      width: 100%;
+	      text-align: center;
     }
 
     .navigation__list__item ion-icon {
-	display: none;
+	      display: none;
     }
 
     .navigation__list__item span {
-	margin: 0 auto;
+	      margin: 0 auto;
     }
 
     .navigation__list__item:hover {
-	border: none
+	      border: none
     }
 }
 
@@ -269,7 +269,7 @@ nav {
 
 @media (max-width: 768px) {
     .playlist {
-	display: none;
+	      display: none;
     }
 }
 
@@ -310,7 +310,7 @@ nav {
 
 @media (max-width: 768px) {
     .playing {
-	border-top: 1px solid #181818;
+	      border-top: 1px solid #181818;
     }
 }
 
@@ -475,67 +475,67 @@ nav {
 
 @media (max-width: 1400px) {
     .current-track__actions {
-	width: 10%;
+	      width: 10%;
     }
 
     .current-track__progress {
-	width: 50%;
+	      width: 50%;
     }
 
     .current-track__options {
-	width: 40%;
+	      width: 40%;
     }
 }
 
 @media (max-width: 980px) {
     .current-track__actions {
-	width: 10%;
+	      width: 10%;
     }
 
     .current-track__progress {
-	width: 40%;
+	      width: 40%;
     }
 
     .current-track__options {
-	width: 50%;
+	      width: 50%;
     }
 }
 
 @media (max-width: 768px) {
     .current-track__actions {
-	width: 25%;
+	      width: 25%;
     }
 
     .current-track__progress {
-	width: 75%;
+	      width: 75%;
     }
 
     .current-track__options {
-	width: 100%;
+	      width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .current-track__actions {
-	width: 100%;
-	justify-content: space-around;
-	padding: 5px 0;
+	      width: 100%;
+	      justify-content: space-around;
+	      padding: 5px 0;
     }
 
     .current-track__progress {
-	width: 100%;
-	padding: 5px 0;
+	      width: 100%;
+	      padding: 5px 0;
     }
 
     .current-track__options {
-	width: 100%;
-	padding: 5px 0;
+	      width: 100%;
+	      padding: 5px 0;
     }
 }
 
 @media (max-width: 768px) {
     .current-track__action {
-	padding-top: 15px;
+	      padding-top: 15px;
     }
 }
 
@@ -544,7 +544,7 @@ nav {
     overflow-y: scroll;
 }
 
-.midle_scroll__header {
+.middle_scroll__header {
     height: 320px;
     border-bottom: 1px solid #282828;
     position: relative;
@@ -560,6 +560,690 @@ nav {
     align-items: flex-end;
 }
 
+.middle_scroll__header:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.15;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backgroun-position: top;
+}
+
+.middle_scroll__header .middle_scroll__info {
+    padding: 15px;
+    z-index: 1;
+    width: 80%;
+    margin-top: 78px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+}
+
+.middle_scroll__header .middle_scroll_info .profile__img {
+    margin-right: 15px;
+}
+
+.middle_scroll__header .middle_scroll__info .profile__img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.middle_scroll__header .middle_scroll__info__type {
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.middle_scroll__header .middle_scroll__info__name {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 100;
+    padding: 0 0 10px 0;
+}
+
+.middle_scroll__header .middle_scroll_info__actions {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.middle_scroll__header .middle_scroll__info__actions button {
+    margin-right: 10px;
+    height: 27px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 0 15px;
+    font-weight: 500;
+}
+
+.middle_scroll__header .middle_scroll__info__actions button ion-icon {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.middle_scroll__header .middle_scroll__info__actions .more {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+}
+
+.middle_scroll__header .middle_scroll_info__actions .more ion-icon {
+    margin: 0;
+    padding-left: 6px;
+}
+
+.middle_scroll__header .listeners {
+    width: 20%;
+    z-index: 1;
+    padding: 15px;
+    text-align: right;
+    color: #aaa;
+    font-weight: 100;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.middle_scroll__header .listeners__label {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.middle_scroll__header .navigation {
+    width: 100%;
+    z-index: 1;
+    background: rgba(24, 24, 24, .6);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.middle_scroll__header .navigation ul {
+    border: none;
+}
+
+.middle_scroll__header .navigation ul li {
+    padding: 0 15px;
+}
+
+.middle_scroll__header .navigation ul li a {
+    padding: 15px 0;
+    color: #aaa;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+}
+
+.middle_scroll__header .navigation ul li a:hover {
+    background: none;
+    border: none;
+    color: #fff;
+    transition: all 0.4s ease;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+}
+
+.middle_scroll__header .navigation ul li.active a {
+    color: #fff;
+    background: none;
+    border: none;
+    border-bottom: 4px solid #1ed760;
+}
+
+.middle_scroll__header .navigation ul li.active a:hover {
+    border-bottom: 4px solid #1ed760;
+}
+
+.middle_scroll__header .navigation__friends {
+    padding: 15px;
+}
+
+.middle_scroll__header .navigation__friends img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.middle_scroll__header .navigation__friends .tooltip {
+    z-index: 1;
+    position: absolute;
+}
+
+.middle_scroll.is-verified .profile__img {
+    position: relative;
+}
+
+.middle_scroll.is-verified .profile__img:after {
+    position: absolute;
+    bottom: 5px;
+    right: 25px;
+    color: #fff;
+    background: #4688d7;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.middle_scroll__content {
+    padding: 15px;
+}
+
+.middle_scroll__content .overview {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.middle_scroll__content .overview__artist {
+    padding-right: 15px;
+    width: 70%;
+}
+
+.middle_scroll__content .overview__artist .latest-release {
+    margin-bottom: 30px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.middle_scroll__content .overview__artist .latest-release__art {
+    width: 75px;
+}
+
+.middle_scroll__content .overview__artist .latest-release__art img {
+    width: 75px;
+    height: 75px;
+}
+
+.middle_scroll__content .overview__artist .latest-release__song {
+    width: calc(100% - 75px);
+    padding: 10px 15px;
+    background: #282828;
+    color: #aaa;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+.middle_scroll__content .overview__artist .latest-release__song__title {
+    color: #c8c8c8;
+}
+
+.middle_scroll_content .overview__related {
+    width: 30%;
+}
+
+@media (max-width: 1024px) {
+    .midle_scroll__content .overview__artist {
+        width: 100%;
+    }
+    .midle_scroll__content .overview__related {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+@media (max-width: 768px) {
+    .midle_scroll__content .overview__artist {
+        padding-right: 0;
+    }
+}
+@media (max-width: 768px) {
+    .midle_scroll {
+        overflow-y: auto;
+    }
+}
+@media (max-width: 522px) {
+    .midle_scroll__header {
+        height: auto;
+        flex-flow: column wrap;
+    }
+}
+
+.midle_scroll__header .midle_scroll__info {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    text-align: center;
+}
+
+.midle_scroll__header .midle_scroll__info .profile__img {
+    margin-right: 0;
+}
+
+.midle_scroll__header .midle_scroll__info__type {
+    margin-top: 10px;
+}
+
+.midle_scroll__header .midle_scroll__listeners {
+    width: 100%;
+    text-align: center;
+}
+
+.tracks {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+}
+
+.tracks__heading {
+    color: #aaa;
+    height: 42px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.tracks__heading__number {
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.tracks__heading__title {
+    margin-left: 70px;
+    width: 45%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tracks__heading__length {
+    margin-left: auto;
+    font-size: 20px;
+}
+
+.tracks__heading__popularity {
+    font-size: 20px;
+    margin-left: 55px;
+    padding-right: 10px;
+}
+
+.tracks .track {
+    border-top: 1px solid #282828;
+    height: 42px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.tracks .track:hover {
+    background: #282828;
+}
+
+.tracks .track:last-child {
+    border-bottom: 1px solid #282828;
+}
+
+.tracks .track__art img {
+    width: 42px;
+    height: 42px;
+}
+
+.tracks .track__number {
+    margin-left: 10px;
+    color: #aaa;
+    width: 12px;
+}
+
+.tracks .track__added {
+    margin-left: 30px;
+    color: #c8c8c8;
+}
+
+.tracks .track__added .added {
+    color: #c8c8c8;
+}
+
+.tracks .track__added .not-added {
+    color: #aaa;
+}
+
+.tracks .track__title {
+    width: 45%;
+    margin-left: 30px;
+    color: #fff;
+}
+
+.tracks .track__title.featured .title:after {
+    margin: 0 5px;
+}
+
+.tracks .track__title.featured .feature {
+    color: #aaa;
+}
+
+.tracks .track__title.featured .feature:after {
+    margin-right: 5px;
+}
+
+.tracks .track__title.featured .feature:last-child:after {
+    margin-right: 0;
+}
+
+.tracks .track__title.featured .feature:hover {
+    cursor: pointer;
+    color: #c8c8c8;
+    text-decoration: underline;
+}
+
+.tracks .track__explicit .label {
+    border: 1px;
+    border-style: solid;
+    border-color: #424242;
+    color: #424242;
+    text-transform: uppercase;
+}
+
+.tracks .track__plays {
+    color: #aaa;
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.tracks .track__length {
+    margin-left: auto;
+    color: #aaa;
+}
+
+.tracks .track__popularity {
+    margin-left: 46px;
+    padding-right: 10px;
+    font-size: 20px;
+    color: #aaa;
+}
+
+@media (max-width: 1200px) {
+    .tracks__heading__title {
+        width: auto;
+    }
+
+    .tracks__heading__popularity {
+        display: none;
+    }
+
+    .tracks .track__title {
+        width: auto !important;
+    }
+
+    .tracks .track__explicit {
+        display: none;
+    }
+    
+    .tracks .track__popularity {
+        display: none;
+    }
+}
+
+.related-artists {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.related-artists .related-artist {
+    background: #282828;
+    padding: 5px;
+    margin-bottom: 2px;
+}
+
+.related-artists .related-artist:hover {
+    background: #373737;
+    text-decoration: none;
+}
+
+.related-artists .related-artist__img img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.related-artists .related-artist__name {
+    margin-left: 15px;
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .related-artists {
+        flex-flow: row wrap;
+    }
+
+    .related-artists .related-artist {
+        margin: 10px;
+        width: calc((100% / 3) - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .related-artists .related-artist {
+        margin: 5px;
+        width: calc((100% / 2) - 10px);
+    }
+}
+@media (max-width: 480px) {
+    .related-artists .related-artist {
+        margin: 5px;
+        width: 20%;
+        background: none;
+    }
+
+    .related-artists .related-artist:hover {
+        background: none;
+        opacity: 0.6;
+    }
+
+    .related-artists .related-artist__name {
+        display: none;
+    }
+}
+
+.overview__albums {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.overview__albums__head {
+    border-bottom: 1px solid #282828;
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overview__albums__head .view-type {
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.overview__albums__head .view-type .active {
+    background: #282828;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.overview__albums__head .view-type ion-icon {
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.overview__albums__head .view-type ion-icon:hover {
+    padding: 8px;
+    border-radius: 50%;
+    background: #353535;
+    cursor: pointer;
+}
+
+.album__info {
+    margin-bottom: 15px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.album__info__art img {
+    width: 135px;
+    height: 135px;
+}
+
+.album__info__meta {
+    width: calc(100% - 150px);
+    margin-left: 15px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.album__info__meta .album__year {
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+.album__info__meta .album__name {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.album__info__meta .album__actions {
+    margin-top: auto;
+}
+
+.album__info__meta .album__actions .save {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 10px;
+}
+
+.album__info__meta .album__actions .save:hover {
+    border-color: #1ed760;
+}
+
+.album__info__meta .album__actions .more {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+}
+
+.album .track__title {
+    width: 70%;
+}
+
+@media (max-width: 1200px) {
+    .album .tracks .track {
+        height: auto;
+        padding: 10px 0;
+    }
+}
+
+.social {
+    padding: 15px;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.social .friends {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+}
+
+.social .friends .friend {
+    padding: 15px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.social .friends .friend:first-child {
+    padding-top: 0;
+}
+
+.social .friends .friend ion-icon {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.media-cards {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.media-cards .media-card {
+    margin: 15px;
+    width: calc((100% / 4) - 30px);
+}
+
+.media-cards .media-card__image {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.media-cards .media-card__image ion-icon {
+    color: #fff;
+    font-size: 72px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: all 0.5s ease;
+    text-shadow: 1px 5px 15px #181818;
+}
+
+.media-cards .media-card__image ion-icon:hover {
+    cursor: pointer;
+}
+
+.media-cards .media-card__image:hover ion-icon {
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+.media-cards .media-card__footer {
+    display: block;
+    background: #282828;
+    padding: 15px;
+    color: #fff;
+}
+
+.media-cards .media-card__footer:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+    .media-cards .media-card {
+        width: calc((100% / 3) - 30px);
+    }
+}
+
+@media (max-width: 768px) {
+    .media-cards .media-card {
+        width: calc((100% / 2) - 30px);
+    }
+}
+
+@media (max-width: 480px) {
+    .media-cards .media-card {
+        margin: 15px 0;
+        width: 100%;
+    }
+}
+
 /* Some extra stuff */
 ::-webkit-scrollbar {
     width: 8px;
@@ -572,24 +1256,24 @@ nav {
 
 @media (max-width: 650px) {
     .header .page-flows {
-	width: 20%;
-	margin: 0;
+	      width: 20%;
+	      margin: 0;
     }
 
     .header .search {
-	width: 65%;
-	margin: 0;
+	      width: 65%;
+	      margin: 0;
     }
 
     .header .search input {
-	width: 100%;
-	background-size: 7%;
+	      width: 100%;
+	      background-size: 7%;
     }
 
     .header .user {
-	width: 100%;
-	margin-top: 15px;
-	justify-content: space-around;
+	      width: 100%;
+	      margin-top: 15px;
+	      justify-content: space-around;
     }
 }
 

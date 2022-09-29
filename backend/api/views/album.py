@@ -10,6 +10,10 @@ class AlbumsAPIView (generics.ListAPIView):
     queryset = Album.objects.all ()
     serializer_class = AlbumSerializer
 
+class AlbumAPIView (generics.RetrieveAPIView):
+    queryset = Album.objects.all ()
+    serializer_class = AlbumSerializer
+
 class AlbumSongsAPIView (generics.ListAPIView):
     serializer_class = SongSerializer
     lookup_url_kwarg = "pk"

@@ -12,7 +12,7 @@ from ..serializers import SongSerializer
 import music_tag
 
 class SongListCreateAPIView (generics.ListCreateAPIView):
-    queryset = Song.objects.all ()
+    queryset = Song.objects.all ().order_by ("-pk")
     serializer_class = SongSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

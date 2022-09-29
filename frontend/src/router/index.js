@@ -10,54 +10,54 @@ import auth from "../logic/auth"
 
 const routes = [
     {
-	path: '/',
-	name: 'Home',	
-	component: Home
+	      path: '/',
+	      name: 'Home',	
+	      component: Home
     },
     {
-	path: "/login",
-	name: "Login",
-	component: Login
+	      path: "/login",
+	      name: "Login",
+	      component: Login
     },
     {
-	path: "/register",
-	name: "Register",
-	component: Register
+	      path: "/register",
+	      name: "Register",
+	      component: Register
     },
     {
-	path: "/upload",
-	name: "Upload",
-	component: Upload
+	      path: "/upload",
+	      name: "Upload",
+	      component: Upload
     },
     {
-	path: "/browse",
-	name: "Browse",
-	component: Empty
+	      path: "/browse",
+	      name: "Browse",
+	      component: Empty
     },
     {
-	path: "/activity",
-	name: "Activity",
-	component: Empty
+	      path: "/activity",
+	      name: "Activity",
+	      component: Empty
     },
     {
-	path: "/radio",
-	name: "Radio",
-	component: Empty
+	      path: "/radio",
+	      name: "Radio",
+	      component: Empty
     },
     {
-	path: "/explore/songs",
-	name: "Songs",
-	component: Empty
+	      path: "/explore/songs",
+	      name: "Songs",
+	      component: Empty
     },
     {
-	path: "/explore/albums",
-	name: "Albums",
-	component: Empty
+	      path: "/explore/albums",
+	      name: "Albums",
+	      component: Empty
     },
     {
-	path: "/explore/artists",
-	name: "Artists",
-	component: Empty
+	      path: "/explore/artists",
+	      name: "Artists",
+	      component: Empty
     }
 ]
 
@@ -73,11 +73,11 @@ router.beforeEach (async (to) => {
 
     if (auth_required && !authenticated)
     {
-	return "/login"
+	      return "/login"
     }
 
     if (!auth_required && authenticated)
-	return "/"
+	      return "/"
 })
 
 export default router
