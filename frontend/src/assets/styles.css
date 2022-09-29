@@ -333,6 +333,7 @@ nav {
 .current-track__actions a {
     font-size: 24px;
     color: #c8c8c8;
+    margin-right: 10px;
 }
 
 .current-track__actions a:hover {

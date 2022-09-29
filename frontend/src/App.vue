@@ -8,6 +8,8 @@
       <router-view></router-view>
     </div>
   </div>
+
+  <CurrentTrack :playing_song="playing_song" />
 </template>
 
 <style>
@@ -17,6 +19,7 @@
 <script>
   import Header from "./components/Header"
   import NavigationLeft from "./components/NavigationLeft"
+  import CurrentTrack from "./components/footer/CurrentTrack"
 
   import auth from "@/logic/auth"
 
@@ -24,7 +27,8 @@
       name: "App",
       components: {
 	  Header,
-	  NavigationLeft
+	  NavigationLeft,
+	  CurrentTrack
       },
       data () {
 	  return {
