@@ -78,7 +78,7 @@ export default {
             this.playlist_height = $(".playlist").outerHeight ()
             this.now_playing_height = $(".playing").outerHeight ()
 
-            this.total_height = window.innerHeight
+            this.total_height = $(window).height ()
         },
         play_song (song) {
             this.playing_song = song
@@ -107,6 +107,11 @@ export default {
                     self.playing = true
                 }
 
+                song_audio.onended = (e) => {
+                    self.playing = false
+                    self.playing_song = null
+                }
+
                 song_audio.ontimeupdate = (e) => {
                     self.current_playtime = ""
 
@@ -129,9 +134,6 @@ export default {
     },
     created () {
         let self = this
-        // $(window).on ("resize", self.resize_viewports)
-        // $(document).ready (self.resize_viewports)
-
         window.onresize = this.resize_viewports
 
         window.addEventListener ("load", (e) => {

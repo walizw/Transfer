@@ -7,10 +7,10 @@
         <div class="track__number">{{number}}</div>
 
         <div v-if="playing_song && song.name === playing_song.name && song.artist_id === playing_song.artist_id"
-             class="track__title text-success" @click="$emit ('clicked', song)">
+             class="track__title text-success">
             {{song.name}}
         </div>
-        <div class="track__title" v-else>
+        <div class="track__title" @click="$emit ('clicked', song)" v-else>
             {{song.name}}
         </div>
     </div>

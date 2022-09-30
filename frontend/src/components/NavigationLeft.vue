@@ -14,8 +14,8 @@
         </section>
 
         <section class="playing">
-            <div class="playing__art" style="width: 50px; height: 50px; background-color: #181818; color: #fff; font-size: 250%; text-align: center;">
-	              <ion-icon name="musical-notes"></ion-icon>
+            <div class="playing__art">
+	              <img :src="default_artwork"/>
             </div>
 
             <div class="playing__song">
@@ -50,6 +50,11 @@ export default {
 	      is_user_logged: Boolean,
 	      playing_song: Object,
         nav_height: Number
+    },
+    computed: {
+        default_artwork () {
+            return require ("../assets/images/album_artwork_placeholder.png")
+        }
     },
     data () {
 	      return {
