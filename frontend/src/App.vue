@@ -16,6 +16,7 @@
     <CurrentTrack :playing_song="playing_song" :playing="playing"
                   :current_playtime="current_playtime"
                   :total_playtime="total_playtime" />
+
     <audio hidden id="song_audio">
         <source v-if="playing_song" :src="playing_song.audio_file" type="audio/mpeg" />
     </audio>
@@ -128,8 +129,14 @@ export default {
     },
     created () {
         let self = this
-        $(window).on ("resize", self.resize_viewports)
-        $(document).ready (self.resize_viewports)
+        // $(window).on ("resize", self.resize_viewports)
+        // $(document).ready (self.resize_viewports)
+
+        window.onresize = this.resize_viewports
+
+        window.addEventListener ("load", (e) => {
+            self.resize_viewports ()
+        })
     }
 }
 </script>
