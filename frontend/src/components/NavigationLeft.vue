@@ -19,15 +19,15 @@
             </div>
 
             <div class="playing__song">
-	              <a class="playing__song__name">
+	              <a class="playing__song__name text-truncated">
                     <!-- TODO: Go to album page -->
 	                  {{playing_song ? playing_song.name : "Nothing is currently playing"}}
 	              </a>
 
-	              <a class="playing__song_artist" href="#">
+	              <router-link :to="playing_song ? `/artist/${playing_song.artist.id}` : '#'">
                     <!-- TODO: Go to artist page -->
                     {{playing_song ? playing_song.artist.name : ""}}
-	              </a>
+	              </router-link>
 
 	              <div class="playing__add" v-if="is_user_logged">
 	                  <!-- TODO: Add -->

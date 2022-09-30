@@ -7,7 +7,8 @@
         <div class="content__middle">
             <div class="middle_scroll"
                  :style="'height:' + middle_height + 'px;'">
-                <router-view @play_song="play_song"></router-view>
+                <router-view @play_song="play_song"
+                             :playing_song="playing_song"></router-view>
             </div>
         </div>
     </div>
@@ -95,6 +96,14 @@ export default {
                     let total_minutes = Math.floor (song_audio.duration / 60)
 
                     self.total_playtime = `${total_minutes}:${total_seconds < 10 ? '0' + total_seconds : total_seconds}`
+                }
+
+                song_audio.onpause = (e) => {
+                    self.playing = false
+                }
+
+                song_audio.onplay = (e) => {
+                    self.playing = true
                 }
 
                 song_audio.ontimeupdate = (e) => {

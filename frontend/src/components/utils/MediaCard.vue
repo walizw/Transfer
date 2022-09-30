@@ -7,8 +7,10 @@
 
         <div class="media-card__footer">
             <div v-if="name && name1">
-                <router-link :to="url">{{name}}</router-link> By<br>
-                <router-link :to="url1">{{name1}}</router-link>
+                <p class="text-truncate">
+                    <router-link :to="url">{{name}}</router-link> By<br>
+                    <router-link :to="url1">{{name1}}</router-link>
+                </p>
             </div>
 
             <div v-if="name && !name1">

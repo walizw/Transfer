@@ -540,7 +540,6 @@ nav {
 }
 
 .middle_scroll {
-    /* height: 617px; */
     overflow-y: scroll;
 }
 
@@ -696,14 +695,14 @@ nav {
     border-bottom: 4px solid rgba(0, 0, 0, 0);
 }
 
-.middle_scroll__header .navigation ul li.active a {
+.middle_scroll__header .navigation ul li a.active {
     color: #fff;
     background: none;
     border: none;
     border-bottom: 4px solid #1ed760;
 }
 
-.middle_scroll__header .navigation ul li.active a:hover {
+.middle_scroll__header .navigation ul li a.active:hover {
     border-bottom: 4px solid #1ed760;
 }
 
@@ -892,6 +891,7 @@ nav {
 .tracks .track__art img {
     width: 42px;
     height: 42px;
+    cursor: pointer;
 }
 
 .tracks .track__number {
@@ -917,6 +917,7 @@ nav {
     width: 45%;
     margin-left: 30px;
     color: #fff;
+    cursor: pointer;
 }
 
 .tracks .track__title.featured .title:after {
