@@ -13,6 +13,7 @@ urlpatterns = [
 
     path ("artists/", views.ArtistsAPIView.as_view ()),
     path ("artist/<int:pk>/", views.ArtistAPIView.as_view ()),
+    path ("artist/<int:pk>/update/", views.ArtistUpdateAPIView.as_view ()),
     path ("artist/<int:pk>/albums/", views.ArtistAlbumsAPIView.as_view ()),
     path ("artist/<int:pk>/songs/", views.ArtistSongsAPIView.as_view ()),
 

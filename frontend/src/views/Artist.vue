@@ -1,9 +1,13 @@
 <template>
+    <UpdateArtistModal :artist_id="artist_info.id"
+                       :artist_name="artist_info.name"
+                       :artist_bio="artist_info.bio" />
+
     <div class="is-verified">
 
         <div class="middle_scroll__header">
             <div class="middle_scroll__info">
-                <div class="profile__img">
+                <div class="profile__img" @click="show_update_artist">
                     <img :src="artist_info.pfp ? artist_info.pfp : default_pfp" :alt="artist_info.name" />
                 </div>
 
@@ -89,12 +93,16 @@ import api from "../logic/api"
 import TrackListItem from "../components/utils/TrackListItem"
 import AlbumInfo from "../components/utils/AlbumInfo"
 
+import UpdateArtistModal from "../components/modals/UpdateArtistModal.vue"
+
 export default {
     name: "Artist",
     components: {
         TrackListItem,
-        AlbumInfo
+        AlbumInfo,
+        UpdateArtistModal
     },
+    emits: ["play_song"],
     props: {
         playing_song: Object
     },
@@ -115,6 +123,9 @@ export default {
             let final_song = song
             song.artist = this.artist_info
             this.$emit ("play_song", final_song)
+        },
+        show_update_artist () {
+            $("#update_artist_modal").modal ("show")
         }
     },
     async created () {

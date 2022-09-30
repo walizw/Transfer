@@ -36,3 +36,8 @@ class ArtistAlbumsAPIView (generics.ListAPIView):
         pk = self.kwargs.get (self.lookup_url_kwarg)
         albums = Album.objects.filter (artist_id=pk).order_by ("-year")
         return albums
+
+class ArtistUpdateAPIView (generics.UpdateAPIView):
+    queryset = Artist.objects.all ()
+    serializer_class = ArtistSerializer
+    lookup_url_kwarg = "pk"
