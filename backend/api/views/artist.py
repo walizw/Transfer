@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 from ..models import Song
 from ..models import Artist
@@ -41,3 +41,4 @@ class ArtistUpdateAPIView (generics.UpdateAPIView):
     queryset = Artist.objects.all ()
     serializer_class = ArtistSerializer
     lookup_url_kwarg = "pk"
+    permission_classes = [permissions.IsAuthenticated]

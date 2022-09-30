@@ -140,3 +140,9 @@ dmypy.json
 *.flv
 *.ogg
 *.wav
+
+*.jpg
+*.png
+*.webp
+*.ttf
+*.dds

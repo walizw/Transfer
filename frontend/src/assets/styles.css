@@ -1246,6 +1246,22 @@ nav {
     }
 }
 
+.modal-content {
+    background-color: #181818;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #aaa;
+}
+
+.modal-header {
+    border-bottom: 1px solid #282828;
+}
+
+.modal-footer {
+    border-top: 1px solid #282828;
+}
+
 /* Some extra stuff */
 ::-webkit-scrollbar {
     width: 8px;
@@ -1336,4 +1352,10 @@ button:hover {
 a {
     text-decoration: none;
     background-color: transparent;
+}
+
+.form-control, .form-control:focus {
+    border: 1px solid #181818;
+    background: #282828;
+    color: #aaa;
 }
