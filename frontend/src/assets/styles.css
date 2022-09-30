@@ -381,16 +381,10 @@ nav {
     border-radius: 50%;
     box-shadow: none;
     border: none;
-    left: 0;
-    display: none;
 }
 
 .current-track__progress__bar .noUi-handle:before, .current-track__progress__bar .noUi-handle:after {
     background: none;
-}
-
-.current-track__progress:hover .noUi-handle {
-    display: block;
 }
 
 .current-track__options {

@@ -106,6 +106,29 @@ export default {
 
                 let self = this
                 song_audio.oncanplay = (e) => {
+                    // self.total_playtimes = song_audio.duration
+                    let slider = document.getElementById ("song-progress")
+                    slider.noUiSlider.destroy ()
+
+                    noUiSlider.create (slider, {
+                        start: [ 0 ],
+                        range: {
+                            'min': [ 0 ],
+                            'max': [ Math.floor (song_audio.duration) ]
+                        }
+                    })
+
+                    slider.noUiSlider.on ("start", () => {
+                        song_audio.pause ()
+                    })
+
+                    slider.noUiSlider.on ("slide", (v) => {
+                        song_audio.currentTime = parseInt (v [0])
+                    })
+
+                    slider.noUiSlider.on ("end", (v) => {
+                        song_audio.play ()
+                    })
                     let total_seconds = Math.floor (song_audio.duration % 60)
                     let total_minutes = Math.floor (song_audio.duration / 60)
 
@@ -126,6 +149,7 @@ export default {
                 }
 
                 song_audio.ontimeupdate = (e) => {
+                    document.getElementById ("song-progress").noUiSlider.set (song_audio.currentTime)
                     self.current_playtime = ""
 
                     let seconds = Math.floor (song_audio.currentTime)
@@ -150,6 +174,15 @@ export default {
         window.onresize = this.resize_viewports
 
         window.addEventListener ("load", (e) => {
+            var slider = document.getElementById ("song-progress")
+            noUiSlider.create (slider, {
+                start: [ 0 ],
+                range: {
+                    'min': [ 0 ],
+                    'max': [ 0 ]
+                }
+            })
+
             self.resize_viewports ()
         })
     }
