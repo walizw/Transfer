@@ -8,12 +8,14 @@ from ..models import Artist
 from ..models import Genre
 
 from ..serializers import SongSerializer
+from ..pagers import SmallResultsSetPagination
 
 import music_tag
 
 class SongListCreateAPIView (generics.ListCreateAPIView):
     queryset = Song.objects.all ().order_by ("-pk")
     serializer_class = SongSerializer
+    pagination_class = SmallResultsSetPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create (self, serializer):
@@ -40,9 +42,9 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
         # Album exists?
         matching_album = Album.objects.filter (name=ftag ["album"], artist_id=artist_id)
         if not matching_album.exists ():
-            matching_album = Album (name=ftag ["album"], artist_id=artist_id)
+            matching_album = Album (name=ftag ["album"], artist_id=artist_id, year=int (ftag["year"]))
             matching_album.save ()
-            
+
             # Add another album to the artist
             matching_artist.albums += 1
             matching_artist.save ()
@@ -58,7 +60,7 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
             matching_genre.save ()
         else:
             matching_genre = matching_genre.get ()
-            
+
         genre_id = matching_genre.pk
 
         serializer.save (name=ftag ["title"],
@@ -71,7 +73,7 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
 
         matching_artist.songs += 1
         matching_artist.save ()
-        
+
         matching_album.songs += 1
         matching_album.save ()
 

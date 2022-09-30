@@ -54,5 +54,10 @@ export default {
         // TODO: Get all pages
         let response = await axios.get (config.ENDPOINT + `artist/${artist_id}/songs/`)
         return response ["data"]
+    },
+    async get_album_songs (album_id) {
+        // TODO: Get all pages
+        let response = await axios.get (config.ENDPOINT + `album/${album_id}/songs/`)
+        return response ["data"]
     }
 }

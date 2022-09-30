@@ -8,3 +8,4 @@ class Album (models.Model):
     # Optional fields
     artwork = models.ImageField (upload_to="artworks/", blank=True, null=True)
     songs = models.DecimalField (max_digits=4, decimal_places=0, default=0)
+    year = models.DecimalField (max_digits=5, decimal_places=0, default=0)

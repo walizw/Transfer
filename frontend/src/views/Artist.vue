@@ -52,7 +52,7 @@
                     <div class="overview__artist">
                         <div class="section-title">Latest</div>
                         <div class="tracks">
-                            <TrackListItem :song="artist_songs.results ? artist_songs.results [index - 1] : {}"
+                            <TrackListItem :song="artist_songs ? artist_songs [index - 1] : {}"
                                            :number="index" @clicked="play_song"
                                            :playing_song="playing_song"
                                            v-for="index in 5" :key="index" />
@@ -67,6 +67,9 @@
                                 <ion-icon name="list" class="list active"></ion-icon>
                             </span>
                         </div>
+
+                        <AlbumInfo :album="album" v-for="album in artist_albums"
+                                   :playing_song="playing_song" @clicked="play_song" />
                     </div>
 
                 </div>
@@ -98,7 +101,8 @@ export default {
     data () {
         return {
             artist_info: [],
-            artist_songs: []
+            artist_songs: [],
+            artist_albums: []
         }
     },
     computed: {
@@ -116,6 +120,7 @@ export default {
     async created () {
         this.artist_info = await api.get_artist_info (this.$route.params.id)
         this.artist_songs = await api.get_artist_songs (this.$route.params.id)
+        this.artist_albums = await this.artist_info.albums
     }
 }
 </script>

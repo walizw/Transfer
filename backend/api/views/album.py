@@ -20,5 +20,5 @@ class AlbumSongsAPIView (generics.ListAPIView):
 
     def get_queryset (self):
         pk = self.kwargs.get (self.lookup_url_kwarg)
-        songs = Song.objects.filter (album_id=pk)
+        songs = Song.objects.filter (album_id=pk).order_by ("track_number")
         return songs

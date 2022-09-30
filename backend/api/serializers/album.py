@@ -10,5 +10,6 @@ class AlbumSerializer (serializers.ModelSerializer):
             "name",
             "artist_id",
             "artwork",
-            "songs"
+            "songs",
+            "year"
         ]
