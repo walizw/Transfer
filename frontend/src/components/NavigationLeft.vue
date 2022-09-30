@@ -15,7 +15,7 @@
 
         <section class="playing">
             <div class="playing__art">
-	              <img :src="default_artwork"/>
+	              <img :src="playing_song && playing_song.album && playing_song.album.artwork ? playing_song.album.artwork : default_artwork"/>
             </div>
 
             <div class="playing__song">

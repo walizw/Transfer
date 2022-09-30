@@ -45,18 +45,19 @@ export default {
         info = response ["data"]
 
         response = await axios.get (config.ENDPOINT + `artist/${artist_id}/albums/`)
-        // TODO: Check if response ["next"] to get all the albums of the artist
         info.albums = response ["data"]
 
         return info
     },
     async get_artist_songs (artist_id) {
-        // TODO: Get all pages
         let response = await axios.get (config.ENDPOINT + `artist/${artist_id}/songs/`)
         return response ["data"]
     },
+    async get_album_info (album_id) {
+        let response = await axios.get (config.ENDPOINT + `album/${album_id}/`)
+        return response ["data"]
+    },
     async get_album_songs (album_id) {
-        // TODO: Get all pages
         let response = await axios.get (config.ENDPOINT + `album/${album_id}/songs/`)
         return response ["data"]
     }

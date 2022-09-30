@@ -1,7 +1,9 @@
 <template>
+    <UpdateAlbumModal :album_id="album.id" :album_name="album.name"
+                      :album_year="album.year" :album_artist="album.artist_id" />
     <div class="album" :id="album_id">
         <div class="album__info">
-            <div class="album__info__art">
+            <div class="album__info__art" @click="show_update_album">
                 <img :alt="album.name" :src="album.artwork ? album.artwork : default_artwork"/>
             </div>
 
@@ -23,7 +25,7 @@
 
                 <TrackAlbumItem :song="song" v-for="song in songs"
                                 :playing_song="playing_song"
-                                @clicked="$emit ('clicked', song)" />
+                                @clicked="play_song" />
             </div>
         </div>
     </div>
@@ -31,14 +33,17 @@
 
 <script>
 import TrackAlbumItem from "./TrackAlbumItem"
+import UpdateAlbumModal from "../modals/UpdateAlbumModal"
 
 import api from"../../logic/api"
 
 export default {
     name: "AlbumInfo",
     components: {
-        TrackAlbumItem
+        TrackAlbumItem,
+        UpdateAlbumModal
     },
+    emits: ["clicked"],
     data () {
         return {
             songs: []
@@ -47,6 +52,15 @@ export default {
     props: {
         album: Object,
         playing_song: Object
+    },
+    methods: {
+        show_update_album () {
+            $(`#update_album${this.album.id}_modal`).modal ("show")
+        },
+        play_song (song) {
+            song.album = this.album
+            this.$emit ('clicked', song)
+        }
     },
     computed: {
         default_artwork () {

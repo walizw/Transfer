@@ -1,17 +1,19 @@
 <template>
     <div class="track" v-if="song" :id="name_id">
         <div class="track__art" @click="$emit ('clicked', song)">
-            <img :alt="song.name" :src="song.artwork ? song.artwork : default_artwork"/>
         </div>
 
         <div class="track__number">{{number}}</div>
 
-        <div v-if="playing_song && song.name === playing_song.name && song.artist_id === playing_song.artist_id"
-             class="track__title text-success">
-            {{song.name}}
-        </div>
-        <div class="track__title" @click="$emit ('clicked', song)" v-else>
-            {{song.name}}
+        <div class="track__title">
+            <i v-if="playing_song && song.name === playing_song.name && song.artist_id === playing_song.artist_id"
+                 @click="play_song"
+                 class="text-success">
+                {{song.name}}
+            </i>
+            <a @click="play_song" v-else>
+                {{song.name}}
+            </a>
         </div>
     </div>
 </template>
@@ -23,6 +25,12 @@ export default {
         song: Object,
         number: Number, // Song number
         playing_song: Object
+    },
+    methods: {
+        play_song () {
+            this.song.album = this.song.album [0]
+            this.$emit ("clicked", this.song)
+        }
     },
     computed: {
         default_artwork () {

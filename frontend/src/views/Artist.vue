@@ -129,8 +129,15 @@ export default {
         }
     },
     async created () {
-        this.artist_info = await api.get_artist_info (this.$route.params.id)
-        this.artist_songs = await api.get_artist_songs (this.$route.params.id)
+        let self = this
+
+        this.artist_info = JSON.parse (JSON.stringify (await api.get_artist_info (this.$route.params.id)))
+            this.artist_songs = JSON.parse (JSON.stringify (await api.get_artist_songs (this.$route.params.id)))
+        this.artist_songs.forEach (x => {
+            x.album = self.artist_info.albums.filter ((e) => {
+                return e.id == x.album_id
+            })
+        })
         this.artist_albums = await this.artist_info.albums
     }
 }
