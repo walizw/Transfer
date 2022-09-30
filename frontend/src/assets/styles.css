@@ -592,6 +592,7 @@ nav {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .middle_scroll__header .middle_scroll__info__type {

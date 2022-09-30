@@ -15,7 +15,8 @@
 
     <CurrentTrack :playing_song="playing_song" :playing="playing"
                   :current_playtime="current_playtime"
-                  :total_playtime="total_playtime" />
+                  :total_playtime="total_playtime"
+                  @pause_current="pause_song" />
 
     <audio hidden id="song_audio">
         <source v-if="playing_song" :src="playing_song.audio_file" type="audio/mpeg" />
@@ -79,6 +80,18 @@ export default {
             this.now_playing_height = $(".playing").outerHeight ()
 
             this.total_height = $(window).height ()
+        },
+        pause_song () {
+            if (!this.playing_song)
+                return
+
+            this.playing = !this.playing
+            let song_audio = document.getElementById ("song_audio")
+
+            if (this.playing)
+                song_audio.play ()
+            else if (!this.playing)
+                song_audio.pause ()
         },
         play_song (song) {
             this.playing_song = song

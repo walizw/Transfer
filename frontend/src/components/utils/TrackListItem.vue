@@ -1,5 +1,5 @@
 <template>
-    <div class="track" v-if="song">
+    <div class="track" v-if="song" :id="name_id">
         <div class="track__art" @click="$emit ('clicked', song)">
             <img :alt="song.name" :src="song.artwork ? song.artwork : default_artwork"/>
         </div>
@@ -27,6 +27,9 @@ export default {
     computed: {
         default_artwork () {
             return require ("@/assets/images/album_artwork_placeholder.png")
+        },
+        name_id () {
+            return this.playing_song ? this.playing_song.name.replace (/\W/g, '_') : ""
         }
     }
 }

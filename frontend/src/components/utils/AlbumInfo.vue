@@ -1,5 +1,5 @@
 <template>
-    <div class="album">
+    <div class="album" :id="album_id">
         <div class="album__info">
             <div class="album__info__art">
                 <img :alt="album.name" :src="album.artwork ? album.artwork : default_artwork"/>
@@ -51,6 +51,10 @@ export default {
     computed: {
         default_artwork () {
             return require ("@/assets/images/album_artwork_placeholder.png")
+        },
+        album_id () {
+            let name = this.album.name
+            return name.split (" ").join ("_")
         }
     },
     async created () {

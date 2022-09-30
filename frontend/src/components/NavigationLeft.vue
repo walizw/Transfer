@@ -19,10 +19,11 @@
             </div>
 
             <div class="playing__song">
-	              <a class="playing__song__name text-truncated">
+	              <router-link class="playing__song__name text-truncated"
+                             :to="playing_song ? `/artist/${playing_song.artist.id}/#album_${name_id}` : '#'">
                     <!-- TODO: Go to album page -->
 	                  {{playing_song ? playing_song.name : "Nothing is currently playing"}}
-	              </a>
+	              </router-link>
 
 	              <router-link :to="playing_song ? `/artist/${playing_song.artist.id}` : '#'">
                     <!-- TODO: Go to artist page -->
@@ -54,6 +55,9 @@ export default {
     computed: {
         default_artwork () {
             return require ("../assets/images/album_artwork_placeholder.png")
+        },
+        name_id () {
+            return this.playing_song ? this.playing_song.name.replace (/\W/g, '_') : ""
         }
     },
     data () {

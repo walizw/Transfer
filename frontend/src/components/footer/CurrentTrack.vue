@@ -5,7 +5,7 @@
 	              <ion-icon name="play-skip-back"></ion-icon>
             </a>
 
-            <a href="#">
+            <a href="#" @click="$emit ('pause_current')">
 	              <ion-icon :name="playing ? 'pause' : 'play'"></ion-icon>
             </a>
 
