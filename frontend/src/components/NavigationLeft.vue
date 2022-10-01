@@ -1,7 +1,7 @@
 <template>
     <div class="content__left">
 
-        <nav :style="'height:' + nav_height + 'px;'">
+        <nav>
             <NavigationList id="main" name="Main" :content="main_menu" />
             <NavigationList id="music" name="Music" :content="music_menu" />
         </nav>
@@ -50,7 +50,6 @@ export default {
     props: {
 	      is_user_logged: Boolean,
 	      playing_song: Object,
-        nav_height: Number
     },
     computed: {
         default_artwork () {

@@ -330,13 +330,13 @@ nav {
     align-items: center;
 }
 
-.current-track__actions a {
+.current-track__actions a ion-icon {
     font-size: 24px;
     color: #c8c8c8;
     margin-right: 10px;
 }
 
-.current-track__actions a:hover {
+.current-track__actions a ion-icon:hover {
     color: #fff;
     cursor: pointer;
 }

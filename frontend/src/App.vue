@@ -2,11 +2,10 @@
     <Header :is_user_logged="is_user_logged" />
 
     <div class="content">
-        <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" :nav_height="nav_height" />
+        <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" />
 
         <div class="content__middle">
-            <div class="middle_scroll"
-                 :style="'height:' + middle_height + 'px;'">
+            <div class="middle_scroll">
                 <router-view @play_song="play_song"
                              :playing_song="playing_song"></router-view>
             </div>
@@ -64,12 +63,24 @@ export default {
     watch: {
         total_height () {
             this.nav_height = window.innerHeight - (this.header_height +
-                                         this.footer_height +
-                                         this.playlist_height +
-                                         this.now_playing_height)
+                                                    this.footer_height +
+                                                    this.playlist_height +
+                                                    this.now_playing_height)
 
             this.middle_height =  window.innerHeight - (this.header_height +
                                                         this.footer_height)
+
+            if ($(window).width () <= 768) {
+                $(".collapse").removeClass ("show")
+                $("nav").css ("height", "auto")
+                $(".artist").css ("height", "auto")
+                $(".middle_scroll").css ("height", this.middle_height)
+            }
+            else {
+                $("nav").css ("height", this.nav_height)
+                $(".middle_scroll").css ("height", this.middle_height)
+                $(".collapse").addClass ("show")
+            }
         }
     },
     methods: {
@@ -173,7 +184,7 @@ export default {
         let self = this
         window.onresize = this.resize_viewports
 
-        window.addEventListener ("load", (e) => {
+        $(document).ready (() => {
             var slider = document.getElementById ("song-progress")
             noUiSlider.create (slider, {
                 start: [ 0 ],

@@ -1,15 +1,15 @@
 <template>
     <section class="current-track">
         <div class="current-track__actions">
-            <a href="#">
+            <a>
 	              <ion-icon name="play-skip-back"></ion-icon>
             </a>
 
-            <a href="#" @click="$emit ('pause_current')">
+            <a @click="$emit ('pause_current')">
 	              <ion-icon :name="playing ? 'pause' : 'play'"></ion-icon>
             </a>
 
-            <a href="#">
+            <a>
 	              <ion-icon name="play-skip-forward"></ion-icon>
             </a>
         </div>
