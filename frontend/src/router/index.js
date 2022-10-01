@@ -5,6 +5,7 @@ import Login from "../views/Login"
 import Register from "../views/Register"
 import Upload from "../views/Upload"
 import Artist from "../views/Artist"
+import Lyrics from "../views/Lyrics"
 import Empty from "../views/Empty"
 
 import auth from "../logic/auth"
@@ -34,6 +35,11 @@ const routes = [
 		path: "/artist/:id",
 		name: "Artist",
 		component: Artist,
+	},
+	{
+		path: "/lyrics",
+		name: "Lyrics",
+		component: Lyrics,
 	},
 	{
 		path: "/activity",
