@@ -2,6 +2,13 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
+from django.core import files
+
+import io
+import uuid
+
 from ..models import Song
 from ..models import Album
 from ..models import Artist
@@ -42,7 +49,20 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
         # Album exists?
         matching_album = Album.objects.filter (name=ftag ["album"], artist_id=artist_id)
         if not matching_album.exists ():
-            matching_album = Album (name=ftag ["album"], artist_id=artist_id, year=int (ftag["year"]))
+            matching_album = Album (name=ftag ["album"],
+                                    artist_id=artist_id,
+                                    year=int (ftag["year"]))
+            if ftag ["artwork"].first.data:
+                artwork = ftag ["artwork"].first
+                thumbnail = artwork.thumbnail ([300, 300])
+                format = artwork.mime.split ('/')[1]
+                img_name = f"{str (uuid.uuid4 ())}.{format}"
+
+                img_io = io.BytesIO ()
+                thumbnail.save (img_io, format)
+
+                img_file = files.File (img_io, name=img_name)
+                matching_album.artwork = img_file
             matching_album.save ()
 
             # Add another album to the artist

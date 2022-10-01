@@ -1,25 +1,37 @@
 <template>
-    <Header :is_user_logged="is_user_logged" />
+  <Header :is_user_logged="is_user_logged" />
 
-    <div class="content">
-        <NavigationLeft :is_user_logged="is_user_logged" :playing_song="playing_song" />
+  <div class="content">
+    <NavigationLeft
+      :is_user_logged="is_user_logged"
+      :playing_song="playing_song"
+    />
 
-        <div class="content__middle">
-            <div class="middle_scroll">
-                <router-view @play_song="play_song"
-                             :playing_song="playing_song"></router-view>
-            </div>
-        </div>
+    <div class="content__middle">
+      <div class="middle_scroll">
+        <router-view
+          @play_song="play_song"
+          :playing_song="playing_song"
+        ></router-view>
+      </div>
     </div>
+  </div>
 
-    <CurrentTrack :playing_song="playing_song" :playing="playing"
-                  :current_playtime="current_playtime"
-                  :total_playtime="total_playtime"
-                  @pause_current="pause_song" />
+  <CurrentTrack
+    :playing_song="playing_song"
+    :playing="playing"
+    :current_playtime="current_playtime"
+    :total_playtime="total_playtime"
+    @pause_current="pause_song"
+  />
 
-    <audio hidden id="song_audio">
-        <source v-if="playing_song" :src="playing_song.audio_file" type="audio/mpeg" />
-    </audio>
+  <audio hidden id="song_audio">
+    <source
+      v-if="playing_song"
+      :src="playing_song.audio_file"
+      type="audio/mpeg"
+    />
+  </audio>
 </template>
 
 <style>
@@ -34,168 +46,166 @@ import CurrentTrack from "./components/footer/CurrentTrack"
 import auth from "@/logic/auth"
 
 export default {
-    name: "App",
-    components: {
-	      Header,
-	      NavigationLeft,
-	      CurrentTrack
-    },
-    data () {
-	      return {
-            playing: false,
-	          playing_song: null,
-            current_playtime: "0:00",
-            total_playtime: "0:00",
-            header_height: 0,
-            footer_height: 0,
-            playlist_height: 0,
-            now_playing_height: 0,
-            total_height: 0,
-            nav_height: 0,
-            middle_height: 0
-	      }
-    },
-    computed: {
-	      is_user_logged () {
-	          return auth.is_user_logged ()
-	      }
-    },
-    watch: {
-        total_height () {
-            this.nav_height = window.innerHeight - (this.header_height +
-                                                    this.footer_height +
-                                                    this.playlist_height +
-                                                    this.now_playing_height)
+	name: "App",
+	components: {
+		Header,
+		NavigationLeft,
+		CurrentTrack,
+	},
+	data() {
+		return {
+			playing: false,
+			playing_song: null,
+			current_playtime: "0:00",
+			total_playtime: "0:00",
+			header_height: 0,
+			footer_height: 0,
+			playlist_height: 0,
+			now_playing_height: 0,
+			total_height: 0,
+			nav_height: 0,
+			middle_height: 0,
+		}
+	},
+	computed: {
+		is_user_logged() {
+			return auth.is_user_logged()
+		},
+	},
+	watch: {
+		total_height() {
+			this.nav_height =
+        window.innerHeight -
+        (this.header_height +
+          this.footer_height +
+          this.playlist_height +
+          this.now_playing_height)
 
-            this.middle_height =  window.innerHeight - (this.header_height +
-                                                        this.footer_height)
+			this.middle_height =
+        window.innerHeight - (this.header_height + this.footer_height)
 
-            if ($(window).width () <= 768) {
-                $(".collapse").removeClass ("show")
-                $("nav").css ("height", "auto")
-                $(".artist").css ("height", "auto")
-                $(".middle_scroll").css ("height", this.middle_height)
-            }
-            else {
-                $("nav").css ("height", this.nav_height)
-                $(".middle_scroll").css ("height", this.middle_height)
-                $(".collapse").addClass ("show")
-            }
-        }
-    },
-    methods: {
-        resize_viewports () {
-            this.header_height = $("header").outerHeight ()
-            this.footer_height = $(".current-track").outerHeight ()
-            this.playlist_height = $(".playlist").outerHeight ()
-            this.now_playing_height = $(".playing").outerHeight ()
+			if ($(window).width() <= 768) {
+				$(".collapse").removeClass("show")
+				$("nav").css("height", "auto")
+				$(".artist").css("height", "auto")
+				$(".middle_scroll").css("height", this.middle_height)
+			} else {
+				$("nav").css("height", this.nav_height)
+				$(".middle_scroll").css("height", this.middle_height)
+				$(".collapse").addClass("show")
+			}
+		},
+	},
+	methods: {
+		resize_viewports() {
+			this.header_height = $("header").outerHeight()
+			this.footer_height = $(".current-track").outerHeight()
+			this.playlist_height = $(".playlist").outerHeight()
+			this.now_playing_height = $(".playing").outerHeight()
 
-            this.total_height = $(window).height ()
-        },
-        pause_song () {
-            if (!this.playing_song)
-                return
+			this.total_height = $(window).height()
+		},
+		pause_song() {
+			if (!this.playing_song) return
 
-            this.playing = !this.playing
-            let song_audio = document.getElementById ("song_audio")
+			this.playing = !this.playing
+			let song_audio = document.getElementById("song_audio")
 
-            if (this.playing)
-                song_audio.play ()
-            else if (!this.playing)
-                song_audio.pause ()
-        },
-        play_song (song) {
-            this.playing_song = song
+			if (this.playing) song_audio.play()
+			else if (!this.playing) song_audio.pause()
+		},
+		play_song(song) {
+			this.playing_song = song
 
-            let song_audio = document.getElementById ("song_audio")
+			let song_audio = document.getElementById("song_audio")
 
-            try {
-                song_audio.load ()
-                song_audio.play ()
+			try {
+				song_audio.load()
+				song_audio.play()
 
-                this.playing = true
+				this.playing = true
 
-                let self = this
-                song_audio.oncanplay = (e) => {
-                    // self.total_playtimes = song_audio.duration
-                    let slider = document.getElementById ("song-progress")
-                    slider.noUiSlider.destroy ()
+				let self = this
+				song_audio.oncanplay = (e) => {
+					let slider = document.getElementById("song-progress")
+					slider.noUiSlider.destroy()
 
-                    noUiSlider.create (slider, {
-                        start: [ 0 ],
-                        range: {
-                            'min': [ 0 ],
-                            'max': [ Math.floor (song_audio.duration) ]
-                        }
-                    })
+					noUiSlider.create(slider, {
+						start: [0],
+						range: {
+							min: [0],
+							max: [Math.floor(song_audio.duration)],
+						},
+					})
 
-                    slider.noUiSlider.on ("start", () => {
-                        song_audio.pause ()
-                    })
+					slider.noUiSlider.on("start", () => {
+						song_audio.pause()
+					})
 
-                    slider.noUiSlider.on ("slide", (v) => {
-                        song_audio.currentTime = parseInt (v [0])
-                    })
+					slider.noUiSlider.on("slide", (v) => {
+						song_audio.currentTime = parseInt(v[0])
+					})
 
-                    slider.noUiSlider.on ("end", (v) => {
-                        song_audio.play ()
-                    })
-                    let total_seconds = Math.floor (song_audio.duration % 60)
-                    let total_minutes = Math.floor (song_audio.duration / 60)
+					slider.noUiSlider.on("end", (v) => {
+						song_audio.play()
+					})
+					let total_seconds = Math.floor(song_audio.duration % 60)
+					let total_minutes = Math.floor(song_audio.duration / 60)
 
-                    self.total_playtime = `${total_minutes}:${total_seconds < 10 ? '0' + total_seconds : total_seconds}`
-                }
+					self.total_playtime = `${total_minutes}:${
+						total_seconds < 10 ? "0" + total_seconds : total_seconds
+					}`
+				}
 
-                song_audio.onpause = (e) => {
-                    self.playing = false
-                }
+				song_audio.onpause = (e) => {
+					self.playing = false
+				}
 
-                song_audio.onplay = (e) => {
-                    self.playing = true
-                }
+				song_audio.onplay = (e) => {
+					self.playing = true
+				}
 
-                song_audio.onended = (e) => {
-                    self.playing = false
-                    self.playing_song = null
-                }
+				song_audio.onended = (e) => {
+					self.playing = false
+					self.playing_song = null
+				}
 
-                song_audio.ontimeupdate = (e) => {
-                    document.getElementById ("song-progress").noUiSlider.set (song_audio.currentTime)
-                    self.current_playtime = ""
+				song_audio.ontimeupdate = (e) => {
+					document
+						.getElementById("song-progress")
+						.noUiSlider.set(song_audio.currentTime)
+					self.current_playtime = ""
 
-                    let seconds = Math.floor (song_audio.currentTime)
-                    let minutes = Math.floor (seconds / 60)
+					let seconds = Math.floor(song_audio.currentTime)
+					let minutes = Math.floor(seconds / 60)
 
-                    self.current_playtime += `${minutes}:`
+					self.current_playtime += `${minutes}:`
 
-                    if (seconds % 60 < 10)
-                        self.current_playtime += `0${seconds % 60}`
-                    else
-                        self.current_playtime += `${seconds  % 60}`
-                }
-            }
-            catch (err) {
-                this.playing = false
-                console.log (err)
-            }
-        }
-    },
-    created () {
-        let self = this
-        window.onresize = this.resize_viewports
+					if (seconds % 60 < 10) self.current_playtime += `0${seconds % 60}`
+					else self.current_playtime += `${seconds % 60}`
+				}
+			} catch (err) {
+				this.playing = false
+				console.log(err)
+			}
+		},
+	},
+	created() {
+		let self = this
+		window.onresize = this.resize_viewports
 
-        $(document).ready (() => {
-            var slider = document.getElementById ("song-progress")
-            noUiSlider.create (slider, {
-                start: [ 0 ],
-                range: {
-                    'min': [ 0 ],
-                    'max': [ 0 ]
-                }
-            })
+		$(document).ready(() => {
+			var slider = document.getElementById("song-progress")
+			noUiSlider.create(slider, {
+				start: [0],
+				range: {
+					min: [0],
+					max: [0],
+				},
+			})
 
-            self.resize_viewports ()
-        })
-    }
+			self.resize_viewports()
+		})
+	},
 }
 </script>

@@ -1,4 +1,4 @@
-.DS-Store
+>.DS-Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -138,3 +138,6 @@ backend/data/*
 backend/data
 
 .#*
+
+node_modules
+package-lock.json

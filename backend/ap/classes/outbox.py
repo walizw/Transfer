@@ -13,8 +13,9 @@ class Outbox ():
     activities = len (ActivityModel.objects.all ())
     activity_model = None
     object = ""
-    
+
     def __init__ (self, data):
+        self.activities = len (ActivityModel.objects.all ())
         self.data = data
 
         if self.data ['type'] == "Follow":
