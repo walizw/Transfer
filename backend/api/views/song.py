@@ -73,6 +73,11 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
 
         album_id = matching_album.pk
 
+        existing_song = Song.objects.filter (name=ftag ["name"], album_id=album_id)
+        if existing_song:
+            # This song already exists
+            return
+
         # Genre exists?
         matching_genre = Genre.objects.filter (name=ftag ["genre"])
         if not matching_genre.exists ():
