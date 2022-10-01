@@ -134,18 +134,7 @@ dmypy.json
 *~
 \#*\#
 
-*.mp3
-*.jpg
-*.png
-*.aac
-*.flv
-*.ogg
-*.wav
-
-*.jpg
-*.png
-*.webp
-*.ttf
-*.dds
+backend/data/*
+backend/data
 
 .#*
