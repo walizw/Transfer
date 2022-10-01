@@ -18,7 +18,9 @@
         <div class="album__year">{{ album.year }}</div>
         <div class="album__name">{{ album.name }}</div>
         <div class="album__actions">
-          <button class="button-light save">Play</button>
+          <button @click="add_album_to_queue" class="button-light save">
+            Play
+          </button>
         </div>
       </div>
     </div>
@@ -35,6 +37,7 @@
           v-for="song in songs"
           :playing_song="playing_song"
           @play_song="play_song"
+          @add_to_queue="add_to_queue"
         />
       </div>
     </div>
@@ -70,6 +73,17 @@ export default {
 		play_song(song) {
 			song.album = this.album
 			this.$emit("play_song", song)
+		},
+		add_to_queue(song) {
+			song.album = this.album
+			this.$emit("add_to_queue", song)
+		},
+		add_album_to_queue() {
+			for (let i = 0; i < this.songs.length; i++) {
+				let final_song = this.songs[i]
+				final_song.album = this.album
+				this.$emit("add_to_queue", final_song)
+			}
 		},
 	},
 	computed: {

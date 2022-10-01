@@ -21,7 +21,7 @@
             {{ artist_info.name }}
           </div>
           <div class="middle_scroll__info__actions">
-            <button class="button-dark">
+            <button class="button-dark" @click="play_artist">
               <ion-icon name="play"></ion-icon>
               Play
             </button>
@@ -164,6 +164,18 @@ export default {
 		},
 		show_update_artist() {
 			$("#update_artist_modal").modal("show")
+		},
+		play_artist() {
+			for (let i = 0; i < this.artist_songs.length; i++) {
+				let final_song = this.artist_songs[i]
+				final_song.artist = this.artist_info
+
+				let album = this.artist_albums.filter((x) => {
+					return x.id == final_song.album_id
+				})
+				final_song.album = album[0]
+				this.$emit("add_to_queue", final_song)
+			}
 		},
 	},
 	async created() {
