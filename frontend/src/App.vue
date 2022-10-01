@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 <template>
   <Header :is_user_logged="is_user_logged" />
 
@@ -80,9 +79,9 @@ export default {
 	},
 	watch: {
 		playing_id() {
-			console.log(this.playing_id)
-
-			if (this.playing_id < 0) this.playing_id = this.playing_queue.length - 1
+			if (this.playing_id < 0)
+				this.playing_id =
+          this.playing_queue.length > 0 ? this.playing_queue.length - 1 : 0
 			else if (this.playing_id >= this.playing_queue.length)
 				this.playing_id = 0
 
