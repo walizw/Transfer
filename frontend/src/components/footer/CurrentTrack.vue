@@ -1,7 +1,7 @@
 <template>
   <section class="current-track">
     <div class="current-track__actions">
-      <a>
+      <a @click="$emit('skip_previous')">
         <ion-icon name="play-skip-back"></ion-icon>
       </a>
 
@@ -9,7 +9,7 @@
         <ion-icon :name="playing ? 'pause' : 'play'"></ion-icon>
       </a>
 
-      <a>
+      <a @click="$emit('skip_next')">
         <ion-icon name="play-skip-forward"></ion-icon>
       </a>
     </div>
@@ -61,6 +61,7 @@
 <script>
 export default {
 	name: "CurrentTrack",
+	emits: ["pause_current", "skip_next", "skip_previous"],
 	props: {
 		playing_song: Object,
 		playing: Boolean,

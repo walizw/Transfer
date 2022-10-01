@@ -1,3 +1,3 @@
 export default {
-	ENDPOINT: "http://localhost:8000/api/v1/",
+	ENDPOINT: "https://transfer.lovelacec.org/api/v1/",
 }
