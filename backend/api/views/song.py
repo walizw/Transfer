@@ -1,5 +1,5 @@
 # from rest_framework import generics
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions, status, filters
 from rest_framework.response import Response
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -24,6 +24,8 @@ class SongListCreateAPIView (generics.ListCreateAPIView):
     serializer_class = SongSerializer
     pagination_class = SmallResultsSetPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
     def perform_create (self, serializer):
         temp_file = serializer.validated_data.get ("audio_file")

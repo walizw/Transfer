@@ -1,35 +1,35 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="section-title pt-3 mr-3">Latest Songs</div>
-      <div class="media-cards">
-        <MediaCard
-          v-for="song in latest_songs"
-          :item_id="song.id"
-          :image="song.album.artwork"
-          :fallback_image="default_album_artwork"
-          icon="play"
-          :name="song.name"
-          url="#"
-          :name1="song.artist.name"
-          :url1="'/artist/' + song.artist.id"
-          @play_song="play_song"
-        />
-      </div>
+	<div class="container">
+		<div class="row">
+			<div class="section-title pt-3 mr-3">Latest Songs</div>
+			<div class="media-cards">
+				<MediaCard
+					v-for="song in latest_songs"
+					:item_id="song.id"
+					:image="song.album ? song.album.artwork : default_artwork"
+					:fallback_image="default_album_artwork"
+					icon="play"
+					:name="song.name"
+					url="#"
+					:name1="song.artist.name"
+					:url1="'/artist/' + song.artist.id"
+					@play_song="play_song"
+				/>
+			</div>
 
-      <div class="section-title pt-3 mr-3">Latest Artists</div>
-      <div class="media-cards">
-        <MediaCard
-          v-for="artist in latest_artists"
-          :item_id="artist.id"
-          :image="artist.pfp"
-          :fallback_image="default_artist_pfp"
-          :name="artist.name"
-          :url="'/artist/' + artist.id"
-        />
-      </div>
-    </div>
-  </div>
+			<div class="section-title pt-3 mr-3">Latest Artists</div>
+			<div class="media-cards">
+				<MediaCard
+					v-for="artist in latest_artists"
+					:item_id="artist.id"
+					:image="artist.pfp"
+					:fallback_image="default_artist_pfp"
+					:name="artist.name"
+					:url="'/artist/' + artist.id"
+				/>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>

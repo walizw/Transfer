@@ -1,47 +1,50 @@
 <template>
-  <UpdateAlbumModal
-    :album_id="album.id"
-    :album_name="album.name"
-    :album_year="album.year"
-    :album_artist="album.artist_id"
-  />
-  <div class="album" :id="album_id">
-    <div class="album__info">
-      <div class="album__info__art" @click="show_update_album">
-        <img
-          :alt="album.name"
-          :src="album.artwork ? album.artwork : default_artwork"
-        />
-      </div>
+	<UpdateAlbumModal
+		:album_id="album.id"
+		:album_name="album.name"
+		:album_year="album.year"
+		:album_artist="album.artist_id"
+	/>
+	<div class="album" :id="album_id">
+		<div class="album__info">
+			<div class="album__info__art" @click="show_update_album">
+				<img
+					:alt="album.name"
+					:src="album.artwork ? album.artwork : default_artwork"
+				/>
+			</div>
 
-      <div class="album__info__meta">
-        <div class="album__year">{{ album.year }}</div>
-        <div class="album__name">{{ album.name }}</div>
-        <div class="album__actions">
-          <button @click="add_album_to_queue" class="button-light save">
-            Play
-          </button>
-        </div>
-      </div>
-    </div>
+			<div class="album__info__meta">
+				<div class="album__year">{{ album.year }}</div>
+				<div class="album__name">{{ album.name }}</div>
+				<div class="album__actions">
+					<button
+						@click="add_album_to_queue"
+						class="button-light save"
+					>
+						Play
+					</button>
+				</div>
+			</div>
+		</div>
 
-    <div class="album__tracks">
-      <div class="tracks">
-        <div class="tracks__heading">
-          <div class="tracks__heading__number">#</div>
-          <div class="tracks__heading__title">Song</div>
-        </div>
+		<div class="album__tracks">
+			<div class="tracks">
+				<div class="tracks__heading">
+					<div class="tracks__heading__number">#</div>
+					<div class="tracks__heading__title">Song</div>
+				</div>
 
-        <TrackAlbumItem
-          :song="song"
-          v-for="song in songs"
-          :playing_song="playing_song"
-          @play_song="play_song"
-          @add_to_queue="add_to_queue"
-        />
-      </div>
-    </div>
-  </div>
+				<TrackAlbumItem
+					:song="song"
+					v-for="song in songs"
+					:playing_song="playing_song"
+					@play_song="play_song"
+					@add_to_queue="add_to_queue"
+				/>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -71,17 +74,14 @@ export default {
 			$(`#update_album${this.album.id}_modal`).modal("show")
 		},
 		play_song(song) {
-			song.album = this.album
 			this.$emit("play_song", song)
 		},
 		add_to_queue(song) {
-			song.album = this.album
 			this.$emit("add_to_queue", song)
 		},
 		add_album_to_queue() {
 			for (let i = 0; i < this.songs.length; i++) {
 				let final_song = this.songs[i]
-				final_song.album = this.album
 				this.$emit("add_to_queue", final_song)
 			}
 		},

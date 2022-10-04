@@ -10,20 +10,7 @@ export default {
 			let response = await axios.get(config.ENDPOINT + `songs/?page=${i}`)
 			let retrieved_songs = response["data"]["results"]
 
-			for (let j = 0; j < retrieved_songs.length; j++) {
-				let artist_id = retrieved_songs[j].artist_id
-				let artist_response = await axios.get(
-					config.ENDPOINT + `artist/${artist_id}/`
-				)
-				retrieved_songs[j].artist = artist_response.data
-
-				let album_id = retrieved_songs[j].album_id
-				let album_response = await axios.get(
-					config.ENDPOINT + `album/${album_id}/`
-				)
-				retrieved_songs[j].album = album_response.data
-				songs.push(retrieved_songs[j])
-			}
+			songs = songs.concat(retrieved_songs)
 		}
 
 		return songs

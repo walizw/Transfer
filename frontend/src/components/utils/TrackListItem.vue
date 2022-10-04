@@ -55,9 +55,7 @@ export default {
 				: ""
 		},
 		song_to_play() {
-			let song = this.song
-			song.album = song.album[0]
-			return song
+			return this.song
 		},
 	},
 }
