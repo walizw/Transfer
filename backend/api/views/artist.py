@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 
 from ..models import Song
 from ..models import Artist
@@ -14,6 +14,8 @@ class ArtistsAPIView (generics.ListAPIView):
     queryset = Artist.objects.all ().order_by ("-pk")
     serializer_class = ArtistSerializer
     pagination_class = SmallResultsSetPagination
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
 class ArtistAPIView (generics.RetrieveAPIView):
     queryset = Artist.objects.all ()

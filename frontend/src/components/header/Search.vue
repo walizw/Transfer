@@ -16,7 +16,7 @@ export default {
 		onSubmit(e) {
 			e.preventDefault()
 
-			alert(`TODO: Buscar ${this.query}`)
+			this.$router.push("/search/" + this.query)
 		},
 	},
 }

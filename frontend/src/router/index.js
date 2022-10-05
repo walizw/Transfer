@@ -7,6 +7,7 @@ import Upload from "../views/Upload"
 import Artist from "../views/Artist"
 import Lyrics from "../views/Lyrics"
 import Queue from "../views/Queue"
+import Search from "../views/Search"
 import Empty from "../views/Empty"
 
 import auth from "../logic/auth"
@@ -46,6 +47,11 @@ const routes = [
 		path: "/queue",
 		name: "Queue",
 		component: Queue,
+	},
+	{
+		path: "/search/:query",
+		name: "Search",
+		component: Search,
 	},
 	{
 		path: "/activity",

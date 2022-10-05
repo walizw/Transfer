@@ -58,4 +58,11 @@ export default {
 		)
 		return response["data"]
 	},
+	async search(query) {
+		// TODO: Get all pages
+		let response = await axios.get(
+			config.ENDPOINT + `songs/?search=${query}`
+		)
+		return response["data"]
+	},
 }

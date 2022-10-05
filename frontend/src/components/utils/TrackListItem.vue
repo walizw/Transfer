@@ -1,34 +1,43 @@
 <template>
-  <div class="track" v-if="song" :id="name_id">
-    <div class="track__art" @click="$emit('play_song', song_to_play)"></div>
+	<div class="track" v-if="song" :id="name_id">
+		<div class="track__art" @click="$emit('play_song', song_to_play)"></div>
 
-    <div class="track__number">{{ number }}</div>
+		<div class="track__number">{{ number }}</div>
 
-    <div class="track__title">
-      <i
-        v-if="
-          playing_song &&
-          song.name === playing_song.name &&
-          song.artist_id === playing_song.artist_id
-        "
-        @click="$emit('play_song', song_to_play)"
-        class="text-success"
-      >
-        {{ song.name }}
-      </i>
-      <a @click="$emit('play_song', song_to_play)" v-else>
-        {{ song.name }}
-      </a>
-    </div>
+		<div class="track__title">
+			<i
+				v-if="
+					playing_song &&
+					song.name === playing_song.name &&
+					song.artist_id === playing_song.artist_id
+				"
+				@click="$emit('play_song', song_to_play)"
+				class="text-success"
+			>
+				{{ song.name }}
+			</i>
+			<a @click="$emit('play_song', song_to_play)" v-else>
+				{{ song.name }}
+				<i v-if="include_artist">
+					&#8212;
+					<router-link
+						:to="'/artist/' + song.artist.id"
+						class="text-muted"
+					>
+						{{ song.artist.name }}
+					</router-link>
+				</i>
+			</a>
+		</div>
 
-    <div class="track__plays">
-      <SongContext
-        @play_song="$emit('play_song', song_to_play)"
-        @add_to_queue="$emit('add_to_queue', song_to_play)"
-        :song="song"
-      />
-    </div>
-  </div>
+		<div class="track__plays">
+			<SongContext
+				@play_song="$emit('play_song', song_to_play)"
+				@add_to_queue="$emit('add_to_queue', song_to_play)"
+				:song="song"
+			/>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -44,6 +53,10 @@ export default {
 		song: Object,
 		number: Number, // Song number
 		playing_song: Object,
+		include_artist: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	computed: {
 		default_artwork() {
