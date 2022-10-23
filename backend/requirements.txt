@@ -1,5 +1,5 @@
 cryptography==38.0.1
-Django==4.1.1
+Django==4.1.2
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.2.0
 music-tag==0.4.3
